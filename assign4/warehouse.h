@@ -16,6 +16,8 @@ class warehouse
 	//Constructor for a warehouse. Takes in the city name.
 	warehouse(std::string);
 	
+	~warehouse();
+	
 	//The item, date, and quantity
 	void receive(item, boost::gregorian::date, int);
 	
