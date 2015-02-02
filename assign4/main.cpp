@@ -2,9 +2,10 @@
 #include "warehouse.h"
 #include "item.h"
 #include<iostream>
-#include<set>
+#include<map>
 
-//using namespace boost::gregorian;
+using namespace boost::gregorian;
+using namespace std;
 
 int main(){
 	
@@ -12,7 +13,7 @@ int main(){
 	//read the files
 	
 	
-	//std::set<warehouse> warehouses;
+	map<string, warehouse> warehouses;
 	
 	
 	
