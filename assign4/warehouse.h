@@ -1,9 +1,12 @@
+#include "dated_item.h"
 #include <string>
 #include <map>
+#include <vector>
 
 class warehouse
 {
 	
+	class dated_item;
 	class item;
 	
 	public:
@@ -19,5 +22,5 @@ class warehouse
 	
 	std::string city_name;
 	//Map of the items in the inventory and how many there are
-	std::map<item, int> inventory;
+	std::vector<dated_item> inventory;
 };

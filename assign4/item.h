@@ -12,13 +12,16 @@ class item
 {
 
 	public:
-	
+	//The UPC code, The name, and the shelf life
 	item(std::string, std::string, int);
+	
 	~item();
 	
-	std::string get_name();
+	std::string get_name() const;
 	
-	int get_shelf_life();
+	std::string get_code() const;
+	
+	int get_shelf_life() const;
 	
 	//implement an equals method and a hashcode method
 	
