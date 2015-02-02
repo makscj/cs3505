@@ -16,11 +16,11 @@ class dated_item
 	
 	~dated_item();
 	
-	//Returns number remaining, 
-	void request();
-	
-	void receive();
-	
+	//Decreases the quantity by the number given
+	void request(int);
+	// Increases the quantity by the number given
+	void receive(int);
+	// Returns the quantity
 	int get_quantity();
 	
 	item get_item();
@@ -34,7 +34,7 @@ class dated_item
 	
 	int quantity;
 	
-	item this_item;
+	item item;
 
 };
 
