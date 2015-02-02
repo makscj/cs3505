@@ -34,7 +34,7 @@ class dated_item
 	
 	int quantity;
 	
-	item this_item;
+	item item;
 
 };
 
