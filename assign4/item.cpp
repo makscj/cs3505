@@ -4,6 +4,7 @@
 #include "item.h"
 #include "dated_item.h"
 
+using namespace std;
 
 item::item(string upc, string _name, int _shelf_life)
 {
@@ -16,18 +17,18 @@ item::~item()
 {
 }
 
-string item::get_name()
+string item::get_name() const
 {
 	return name;
 }
 
 
-string item::get_code()
+string item::get_code() const
 {
 	return code;
 }
 
-boost::gregorian::date item::get_expiration_date(boost::gregorian::date _date)
+boost::gregorian::date item::get_expiration_date(boost::gregorian::date _date) const
 {
 	boost::gregorian::date_duration duration(shelf_life);
 	
@@ -36,5 +37,5 @@ boost::gregorian::date item::get_expiration_date(boost::gregorian::date _date)
 
 bool item::operator== (const item & rhs) const
 {
-	return upc == rhs.upc;
+	return code == rhs.code;
 }
