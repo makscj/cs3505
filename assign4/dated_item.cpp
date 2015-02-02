@@ -1,11 +1,12 @@
 #include "item.h"
+#include "dated_item.h"
 #include<string>
 #include <boost/date_time/gregorian/gregorian.hpp>
 
 using namespace std;
 using namespace boost::gregorian;
 
-dated_item:dated_item(item item, date date, int quantity){
+dated_item::dated_item(item item, date date, int quantity){
 	this->item = item;
 	this->date = date;
 	this->quantity = quantity;
@@ -32,5 +33,5 @@ item dated_item::get_item(){
 }
 
 date dated_item::get_date(){
-	return this->date
+	return this->date;
 }
