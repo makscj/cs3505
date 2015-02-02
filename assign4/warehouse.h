@@ -27,6 +27,8 @@ class warehouse
 	//Check if the warehouse contains the specific item
 	bool contains(item);
 	
+	// Clears expired items from this warehouse's inventory
+	void clear_expired_items();
 	
 	
 	private:

@@ -9,6 +9,7 @@
 #define ITEM_H
 
 #include<string>
+#include <boost/date_time/gregorian/gregorian.hpp>
 
 
 class item
@@ -28,6 +29,8 @@ class item
 	
 	//implement an equals method and a hashcode method
 	
+	// Returns the date this type of food item will expire when received on a given date.
+	boost::gregorian::date get_expiration_date(boost::gregorian::date);
 	
 	private:
 	//The UPC code of the item
