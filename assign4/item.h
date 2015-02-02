@@ -27,6 +27,8 @@ class item
 	
 	int get_shelf_life() const;
 	
+	bool operator== ( const & rhs) const;
+	
 	//implement an equals method and a hashcode method
 	
 	// Returns the date this type of food item will expire when received on a given date.
