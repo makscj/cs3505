@@ -6,9 +6,9 @@
 using namespace std;
 using namespace boost::gregorian;
 
-dated_item::dated_item(item item, date date, int quantity){
-	this->item = item;
-	this->date = date;
+dated_item::dated_item(item _item, date _date, int quantity){
+	this->_item = _item;
+	this->_date = _date;
 	this->quantity = quantity;
 }
 
@@ -29,9 +29,9 @@ int dated_item::get_quantity(){
 }
 
 item dated_item::get_item(){
-	return this->item;
+	return this->_item;
 }
 
 date dated_item::get_date(){
-	return this->date;
+	return this->_date;
 }

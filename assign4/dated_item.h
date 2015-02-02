@@ -12,7 +12,7 @@ class dated_item
 	public:
 	
 	//Item, Date, Quantity
-	dated_item(item, boost::gregorian::date, int);
+	dated_item(item _item, boost::gregorian::date _date, int quantity);
 	
 	~dated_item();
 	
@@ -30,7 +30,7 @@ class dated_item
 	private:
 	
 	//date
-	boost::gregorian::date date;
+	boost::gregorian::date _date;
 	
 	int quantity;
 	
