@@ -19,5 +19,5 @@ class warehouse
 	
 	std::string city_name;
 	//Map of the items in the inventory and how many there are
-	map<item, int> inventory;
+	std::map<item, int> inventory;
 };

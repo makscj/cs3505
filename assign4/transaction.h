@@ -17,8 +17,8 @@ class transaction
 	
 	
 	private:
-	set<item> items;
-	set<warehouse> warehouses;
+	std::set<item> items;
+	std::set<warehouse> warehouses;
 	//Date_time object from boost
 	
 };
