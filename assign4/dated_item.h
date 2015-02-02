@@ -1,10 +1,13 @@
+#ifndef DATED_ITEM_H
+#define DATED_ITEM_H
+
+
+#include "item.h"
 #include<string>
 #include <boost/date_time/gregorian/gregorian.hpp>
 
 class dated_item
-{
-	class item;
-	
+{	
 	
 	public:
 	
@@ -34,3 +37,5 @@ class dated_item
 	item this_item;
 
 };
+
+#endif

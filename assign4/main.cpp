@@ -1,8 +1,20 @@
 #include "dated_item.h"
+#include "warehouse.h"
+#include "item.h"
+#include<iostream>
+#include<set>
 
 //using namespace boost::gregorian;
 
 int main(){
 	
-	return 0;
+	
+	//read the files
+	
+	
+	//std::set<warehouse> warehouses;
+	
+	
+	
+	
 }

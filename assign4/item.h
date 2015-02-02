@@ -5,6 +5,9 @@
 *
 */
 
+#ifndef ITEM_H
+#define ITEM_H
+
 #include<string>
 
 
@@ -34,3 +37,5 @@ class item
 	//The name of the item
 	std::string name;
 };
+
+#endif
