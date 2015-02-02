@@ -25,9 +25,9 @@ class item
 	
 	std::string get_code() const;
 	
-	int get_shelf_life() const;
+	//int get_shelf_life() const;
 	
-	bool operator== ( const & rhs) const;
+	bool operator== (const item & rhs) const;
 	
 	//implement an equals method and a hashcode method
 	
