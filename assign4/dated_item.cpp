@@ -6,11 +6,11 @@
 using namespace std;
 using namespace boost::gregorian;
 
-dated_item::dated_item(item _item, date _date, int quantity){
-	this->_item = _item;
-	this->_date = _date;
-	this->quantity = quantity;
-}
+dated_item::dated_item(item _item, date _date, int quantity)
+	: _item(_item)
+	, _date(_date)
+	, quantity(quantity)
+	{}
 
 dated_item::~dated_item(){
 	
