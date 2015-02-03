@@ -13,6 +13,10 @@ item::item(string upc, string _name, int _shelf_life)
 	this->shelf_life = _shelf_life;
 }
 
+item::item(const item &other){
+	*this = other;
+}
+
 item::~item()
 {
 }
@@ -38,4 +42,11 @@ boost::gregorian::date item::get_expiration_date(boost::gregorian::date _date) c
 bool item::operator== (const item & rhs) const
 {
 	return code == rhs.code;
+}
+
+item& item::operator= (const item &rhs){
+	code = rhs.code;
+	name = rhs.name;
+	shelf_life = rhs.shelf_life;
+	return *this;
 }
