@@ -15,7 +15,11 @@ class warehouse
 	
 	//Constructor for a warehouse. Takes in the city name.
 	warehouse(std::string);
-	
+	// Copy constructor
+	warehouse(const warehouse &other);
+	// Default constructor
+	warehouse();
+	// Destructor
 	~warehouse();
 	
 	//The item, date, and quantity
@@ -30,6 +34,8 @@ class warehouse
 	// Clears expired items from this warehouse's inventory
 	void clear_expired_items();
 	
+	// Assignment operator
+	warehouse& operator=(const warehouse &rhs);
 	
 	private:
 	
