@@ -21,15 +21,23 @@ int main(){
 	while(true)
 	{
 		string word;
+		in.ignore();
 		in >> word;
-		getline(in, word);
+		getline(in, word, '\n');
+
 		if (in.fail())
 			break;
 		arr.push_back(word);
+		cout << word << endl;
 		
 	}
-	
-	
-	
+	cout << "############################################" << endl;
+	for(vector<string>::iterator it = arr.begin(); it != arr.end(); it++)
+	{
+		string s = *it;
+		cout << s << endl;
+	}
+		
+	cout << "End of main" << endl;
 	
 }
