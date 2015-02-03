@@ -13,8 +13,16 @@ item::item(string upc, string _name, int _shelf_life)
 	this->shelf_life = _shelf_life;
 }
 
-item::item(const item &other){
+item::item(const item &other)
+{
 	*this = other;
+}
+
+item::item()
+{
+	code = "";
+	name = "";
+	shelf_life = 0;
 }
 
 item::~item()

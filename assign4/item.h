@@ -19,6 +19,7 @@ class item
 	//The UPC code, The name, and the shelf life
 	item(std::string, std::string, int);
 	item(const item &other);
+	item();
 	
 	~item();
 	

@@ -14,6 +14,7 @@ class dated_item
 	//Item, Date, Quantity
 	dated_item(item _item, boost::gregorian::date _date, int quantity);
 	dated_item(const dated_item &other);
+	dated_item();
 	
 	~dated_item();
 	
