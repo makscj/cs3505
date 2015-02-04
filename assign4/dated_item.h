@@ -19,9 +19,9 @@ class dated_item
 	~dated_item();
 	
 	//Decreases the quantity by the number given
-	void request(int);
+	void remove(int);
 	// Increases the quantity by the number given
-	void receive(int);
+	void add(int);
 	// Returns the quantity
 	int get_quantity();
 	

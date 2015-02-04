@@ -26,31 +26,38 @@ dated_item::dated_item()
 	quantity = 0;
 }
 
-dated_item::~dated_item(){
+dated_item::~dated_item()
+{
 	
 }
 
-void dated_item::request(int quantity){
+void dated_item::remove(int quantity)
+{
 	this->quantity -= quantity;
 }
 
-void dated_item::receive(int quantity){
+void dated_item::add(int quantity)
+{
 	this->quantity += quantity;
 }
 
-int dated_item::get_quantity(){
+int dated_item::get_quantity()
+{
 	return this->quantity;
 }
 
-item dated_item::get_item(){
+item dated_item::get_item()
+{
 	return this->_item;
 }
 
-date dated_item::get_date(){
+date dated_item::get_date()
+{
 	return this->_date;
 }
 
-dated_item& dated_item::operator= (const dated_item &rhs){
+dated_item& dated_item::operator= (const dated_item &rhs)
+{
 	_item = rhs._item;
 	_date = rhs._date;
 	quantity = rhs.quantity;

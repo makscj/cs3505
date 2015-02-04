@@ -32,7 +32,7 @@ class warehouse
 	bool contains(item);
 	
 	// Clears expired items from this warehouse's inventory
-	void clear_expired_items();
+	void clear_expired_items(boost::gregorian::date current_date);
 	
 	// Assignment operator
 	warehouse& operator=(const warehouse &rhs);
