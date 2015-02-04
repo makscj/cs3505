@@ -30,6 +30,7 @@ class item
 	//int get_shelf_life() const;
 	
 	bool operator== (const item & rhs) const;
+	
 	item& operator= (const item & rhs);
 	
 	//implement an equals method and a hashcode method

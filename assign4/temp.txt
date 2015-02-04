@@ -1,0 +1,50 @@
+getline(in, word, '\n');
+
+
+if(!word.compare(0,headers[0].size(), headers[0]))
+		{
+			//FoodItem
+			
+			
+			
+			
+			
+			//upc, name, shelf-life
+			
+			
+			food_items.insert ( pair<string, item>
+		}
+		else if(!word.compare(0,headers[1].size(), headers[1]))
+		{
+			//Warehouse
+			cout << headers[1] << word <<  endl;
+		}
+		else if(!word.compare(0,headers[2].size(), headers[2]))
+		{
+			//Start date
+			cout << headers[2] << word <<  endl;
+		}
+		else if(!word.compare(0,headers[3].size(), headers[3]))
+		{
+			//Receive
+			cout << headers[3] << word <<  endl;
+		}
+		else if(!word.compare(0,headers[4].size(), headers[4]))
+		{
+			//Request
+			cout << headers[4] << word <<  endl;
+		}
+		else if(!word.compare(0,headers[5].size(), headers[5]))
+		{
+			//Next day
+			cout << headers[5] << word <<  endl;
+		}
+		else if(!word.compare(0,headers[6].size(), headers[6]))
+		{
+			//End
+			cout << headers[6] << word << endl;
+		}	
+		else
+		{
+			cout << "WRONG COMMAND" << endl;
+		}		
