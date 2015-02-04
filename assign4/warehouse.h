@@ -38,10 +38,13 @@ class warehouse
 	warehouse& operator=(const warehouse &rhs);
 	
 	private:
-	
 	std::string city_name;
 	//Map of the items in the inventory and how many there are
 	std::vector<dated_item> inventory;
+	
+	void remove_item(item requested_item, boost::gregorian::date expiration_date, int quantity);
+	int get_quantity(item requested_item, boost::gregorian::date expiration_date);
+	boost::gregorian::date get_oldest_date(item requested_item);
 };
 
 #endif

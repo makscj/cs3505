@@ -51,47 +51,51 @@ void warehouse::receive(item new_item, date current_date, int quantity)
 
 void warehouse::request(item requested_item, int quantity)
 {
-	// DELETE THIS AND FIX THE METHOD
-	cout << "THIS DOES NOT WORK" << endl;
-	vector<vector<dated_item>::iterator> remove_iterators;
-	for(vector<dated_item>::iterator it = inventory.begin(); it != inventory.end(); it++)
+	bool done_removing = false;
+	while(!done_removing)
 	{
-		if((*it).get_item() == requested_item)
+		// Get the date of the oldest item in the inventory.
+		date oldest_date = get_soonest_date(requested_item);
+		// If the date is date(not_a_date_time) then there are none of the requested item in the inventory.
+		if(oldest_date == date(not_a_date_time))
 		{
-			if((*it).get_quantity() > quantity)
-			{
-				(*it).remove(quantity);
-				break;
-			}
-			else if((*it).get_quantity() == quantity)
-			{
-				remove_iterators.push_back(it);
-				break;
-			}
-			else
-			{
-				quantity -= (*it).get_quantity();
-				remove_iterators.push_back(it);
-			}
-			
+			done_removing = true;
+			break;
 		}
+		int num_in_inventory = get_quantity(requested_item, oldest_date);
+		// Remove the requested quantity from the inventory.
+		remove_item(requested_item, oldest_date, quantity);
+		
+		// If the number in the inventory with that date is less than the quantity remaining, decrease the quantity
+		// by the number in the inventory.
+		if(num_in_inventory < quantity)
+		{
+			quantity -= num_in_inventory;
+		}
+		// Otherwise, we are done.
+		else
+		{
+			done_removing = true;
+		}
+	
 	}
 }
 
 bool warehouse::contains(item requested_item)
 {
-	return false;
+	return get_soonest_date(reqested_item) != date(not_a_date_time);
 }
 
 void warehouse::clear_expired_items(date current_date)
 {
 	// Tracks the iterator locations for the items we want to remove.
 	vector<vector<dated_item>::iterator> remove_iterators;
-	// Loop through the inventory and store the iterator locations for all
-	// dated_items with date at or after the current date.
-	for(vector<dated_item>::iterator it = inventory.begin(); it != inventory.end(); it++){
+	// Loop through the inventory and remove all the items with a date at or after the current date.
+	for(vector<dated_item>::iterator it = inventory.begin(); it != inventory.end(); it++)
+	{
 		if((*it).get_date() >= current_date){
-			remove_iterators.push_back(it);
+			//remove_iterators.push_back(it);
+			it = inventory.erase(it);
 		}
 	}
 	// Loop through the iterator vector in reverse and remove all the items at the
@@ -107,4 +111,58 @@ warehouse& warehouse::operator=(const warehouse &rhs)
 	city_name = rhs.city_name;
 	inventory = rhs.inventory;
 	return *this;
+}
+
+// Removes the given quantity of the given item with the given expiration date.
+// If the item would have a 0 or negative quantity after the removal, the item is removed from the inventory vector
+void warehouse::remove_item(item requested_item, date expiration_date, int quantity)
+{
+	vector<vector<dated_item>::iterator> to_remove;
+	for(vector<dated_item>::iterator it = inventory.begin(); it != inventory.end(); it++)
+	{
+		if((*it).get_item() == requested_item && (*it).get_date() == expiration_date)
+		{
+			if((*it).get_quantity() <= quantity)
+			{
+				inventory.erase(it);
+			}
+			else
+			{
+				(*it).remove(quantity);
+			}
+			break;
+		}
+	}
+}
+
+// Gets the quantity of the given item at the given date that exists in the warehouse.
+int warehouse::get_quantity(item requested_item, date expiration_date)
+{
+	BOOST_FOREACH(dated_item _item, inventory)
+	{
+		if(_item.get_item() == requested_item && _item.get_date() == expiration_date)
+		{
+			return _item.get_quantity();
+		}
+	}
+	return 0;
+}
+
+
+// Gets the soonest (farthest back in time) date that any item matching the given item
+// will expire. Returns date(not_a_date_time) if the item is not found.
+date warehouse::get_soonest_date(item requested_item)
+{
+	date soonest_date;
+	BOOST_FOREACH(dated_item _item, inventory)
+	{
+		if(_item.get_item() == requested_item)
+		{
+			if(soonest_date == date(not_a_date_time) || _item.get_date() < soonest_date)
+			{
+				soonest_date = _item.get_date();
+			}
+		}
+	}
+	return soonest_date;
 }
