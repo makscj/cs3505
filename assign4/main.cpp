@@ -7,9 +7,22 @@
 #include<map>
 #include<vector>
 #include<set>
+#include<boost/foreach.hpp>
 
 using namespace boost::gregorian;
 using namespace std;
+
+
+bool contains(set<string> data, string to_find)
+{
+	BOOST_FOREACH(string s, data)
+	{
+		if( s == to_find)
+			return true;
+	}
+	return false;
+}
+
 
 int main(){
 	date current_day;
@@ -33,24 +46,24 @@ int main(){
 		string word;
 		in >> word;
 		
-		cout << word << endl;
 		
-		if(heads.find(word) == 0)
+		if(contains(heads, word))
 		{
-			cout << word << " -> " << "EY" << endl;
+			cout << word << " -> " << "AYY" << endl;
 		}
+		else
 		{
-			cout << word << " ! " << "NO LUCK"<< endl;
+			cout << word << " ! " << "lmao"<< endl;
 		}
 		if (in.fail())
 			break;
 			
 	}
-	cout << "############################################" << endl;
+	//cout << "############################################" << endl;
 	for(vector<string>::iterator it = arr.begin(); it != arr.end(); it++)
 	{
 		string s = *it;
-		cout << s << endl;
+		//cout << s << endl;
 	}
 		
 	cout << "End of main" << endl;
