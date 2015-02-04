@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <iostream>
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/foreach.hpp>
 #include "warehouse.h"
@@ -30,9 +31,9 @@ warehouse::~warehouse()
 	
 }
 
+// Receives a given quantity of a given item on a given date.
 void warehouse::receive(item new_item, date current_date, int quantity)
 {
-	
 	BOOST_FOREACH(dated_item cur, inventory)
 	{
 		// If we find a dated item with the same item and date, just increase the quantity of that item.
@@ -50,12 +51,34 @@ void warehouse::receive(item new_item, date current_date, int quantity)
 
 void warehouse::request(item requested_item, int quantity)
 {
-	BOOST_FOREACH(dated_item cur, inventory){
-		
+	// DELETE THIS AND FIX THE METHOD
+	cout << "THIS DOES NOT WORK" << endl;
+	vector<vector<dated_item>::iterator> remove_iterators;
+	for(vector<dated_item>::iterator it = inventory.begin(); it != inventory.end(); it++)
+	{
+		if((*it).get_item() == requested_item)
+		{
+			if((*it).get_quantity() > quantity)
+			{
+				(*it).remove(quantity);
+				break;
+			}
+			else if((*it).get_quantity() == quantity)
+			{
+				remove_iterators.push_back(it);
+				break;
+			}
+			else
+			{
+				quantity -= (*it).get_quantity();
+				remove_iterators.push_back(it);
+			}
+			
+		}
 	}
 }
 
-bool warehouse::contains(item item)
+bool warehouse::contains(item requested_item)
 {
 	return false;
 }
