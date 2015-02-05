@@ -45,6 +45,9 @@ class item
 	int shelf_life;
 	//The name of the item
 	std::string name;
+	
+	friend std::ostream& operator<<(std::ostream&, const item&);
+	
 };
 
 #endif

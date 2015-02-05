@@ -58,3 +58,9 @@ item& item::operator= (const item &rhs){
 	shelf_life = rhs.shelf_life;
 	return *this;
 }
+
+std::ostream& operator<<(std::ostream &stream, const item &_item)
+{
+	string output = _item.code + " "+ _item.name;
+	stream << output;
+}

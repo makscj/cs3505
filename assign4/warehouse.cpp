@@ -57,7 +57,7 @@ void warehouse::request(item requested_item, int quantity)
 		// Get the date of the oldest item in the inventory.
 		date oldest_date = get_soonest_date(requested_item);
 		// If the date is date(not_a_date_time) then there are none of the requested item in the inventory.
-		if(oldest_date == date(not_a_date_time))
+		if(oldest_date.is_not_a_date())
 		{
 			done_removing = true;
 			break;
@@ -84,7 +84,7 @@ void warehouse::request(item requested_item, int quantity)
 // Returns true if the warehouse contains and amount of the given item and false otherwise.
 bool warehouse::contains(item requested_item)
 {
-	return get_soonest_date(requested_item) != date(not_a_date_time);
+	return !get_soonest_date(requested_item).is_not_a_date();
 }
 
 // Removes all items from the warehouse that expire on or before the given date.
