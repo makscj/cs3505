@@ -45,6 +45,8 @@ int main(){
 		vector<string> word_array;
 		boost::split(word_array, word, boost::is_any_of(" "));
 		
+		
+		
 		if(!word.compare(0,headers[0].size(), headers[0]))
 		{
 			//Food Item
@@ -115,15 +117,9 @@ int main(){
 			vector<string> date_parts;
 			
 			boost::split(date_parts, start_date, boost::is_any_of("/"));
-			string temp_date = date_parts[2];
-			temp_date += "/" + date_parts[0] + "/" + date_parts[1];
+			string temp_date = date_parts[2] + "/" + date_parts[0] + "/" + date_parts[1];
 			
-			current_day = from_string("2010/01/05");
-			
-			cout << to_simple_string(current_day) << endl;
-			
-			//cout << temp_date << endl;
-			
+			current_day = from_string(temp_date);
 			
 		}
 		else if(!word.compare(0,headers[3].size(), headers[3]))
