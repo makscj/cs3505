@@ -84,28 +84,34 @@ int main(){
 				}
 			}
 		}
+		/*
 		else if(!word.compare(0,headers[1].size(), headers[1]))
 		{	
 			for(vector<string>::iterator it = word_array.begin(); it != word_array.end(); it++)
 			{
 				string _warehouse = "";
-				it++;
-				it++;
-				while(it != word_array.end())
+				if(!(*it).compare("Warehouse") || !(*it).compare("-") || !(*it).compare(" "))
+					continue;
+				else
 				{
-					warehouse += *it;
-					it++;
+					while(it != word_array.end())
+					{
+						warehouse += *it;
+						it++;
+					}
+					warehouse new_warehouse (_warehouse);
+					warehouses[_warehouse] = new_warehouse;
+					break;
 				}
-				warehouse new_warehouse (_warehouse);
-				warehouses[_warehouse] = new_warehouse;
-				break;
+				
 			}
 		}
+		*/
 		/*
 		else if(!word.compare(0,headers[2].size(), headers[2]))
 		{
 			//Start date
-			cout << headers[2] << word <<  endl;
+			
 		}
 		else if(!word.compare(0,headers[3].size(), headers[3]))
 		{
