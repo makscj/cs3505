@@ -81,28 +81,21 @@ void warehouse::request(item requested_item, int quantity)
 	}
 }
 
+// Returns true if the warehouse contains and amount of the given item and false otherwise.
 bool warehouse::contains(item requested_item)
 {
-	return get_soonest_date(reqested_item) != date(not_a_date_time);
+	return get_soonest_date(requested_item) != date(not_a_date_time);
 }
 
+// Removes all items from the warehouse that expire on or before the given date.
 void warehouse::clear_expired_items(date current_date)
 {
-	// Tracks the iterator locations for the items we want to remove.
-	vector<vector<dated_item>::iterator> remove_iterators;
 	// Loop through the inventory and remove all the items with a date at or after the current date.
 	for(vector<dated_item>::iterator it = inventory.begin(); it != inventory.end(); it++)
 	{
 		if((*it).get_date() >= current_date){
-			//remove_iterators.push_back(it);
 			it = inventory.erase(it);
 		}
-	}
-	// Loop through the iterator vector in reverse and remove all the items at the
-	// iterator locations.
-	BOOST_REVERSE_FOREACH(vector<dated_item>::iterator it, remove_iterators)
-	{
-		inventory.erase(it);
 	}
 }
 

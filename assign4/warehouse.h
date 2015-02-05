@@ -42,9 +42,12 @@ class warehouse
 	//Map of the items in the inventory and how many there are
 	std::vector<dated_item> inventory;
 	
+	// Removes the given quantity of the given item with the given date from the inventory.
 	void remove_item(item requested_item, boost::gregorian::date expiration_date, int quantity);
+	// Gets the quantity of the given item with the given date.
 	int get_quantity(item requested_item, boost::gregorian::date expiration_date);
-	boost::gregorian::date get_oldest_date(item requested_item);
+	// Gets the soonest (farthest back in time) date that any item of the given type will expire.
+	boost::gregorian::date get_soonest_date(item requested_item);
 };
 
 #endif
