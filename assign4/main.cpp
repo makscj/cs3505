@@ -17,6 +17,34 @@ using namespace boost::gregorian;
 using namespace std;
 
 
+int main2()
+{
+	/*
+	vector<string> temp;
+	temp.push_back("05/01/2010");
+	
+	for(vector
+	
+	vector<string> date_parts;
+	
+	string start_date = "05/01/2010";
+	
+	boost::split(date_parts, start_date, boost::is_any_of("/"));
+	
+	string temp_date (date_parts[2] + "/" + date_parts[0] + "/" + date_parts[1]);
+	
+	date current_day;
+	current_day = from_string(temp_date.c_str());
+	
+	
+	std::cout 
+	<< boost::lexical_cast<std::u32string>(1.0).size() 
+	<< " " 
+	<< boost::lexical_cast<std::u16string>(1.0).size();
+	*/
+	return 0;
+}
+
 
 int main(){
 	date current_day;
@@ -113,13 +141,23 @@ int main(){
 				}	
 			}
 			
-
+		
 			vector<string> date_parts;
 			
 			boost::split(date_parts, start_date, boost::is_any_of("/"));
-			string temp_date = date_parts[2] + "/" + date_parts[0] + "/" + date_parts[1];
 			
-			current_day = from_string(temp_date);
+			string temp_date (date_parts[2] + "-" + date_parts[0] + "-" + date_parts[1]);
+			string temp_date2 ("2010/01/05");
+			
+			/*
+			if(typeid(temp_date) == typeid(temp_date2))
+				cout << "They're the same!" << endl;
+			else
+				cout << "They're different!" << endl;
+			
+			cout << typeid(date_parts[0]).name() << endl;
+			*/
+			current_day = from_simple_string(temp_date.c_str());
 			
 		}
 		else if(!word.compare(0,headers[3].size(), headers[3]))
