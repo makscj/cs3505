@@ -19,6 +19,8 @@ using namespace boost::gregorian;
 using namespace std;
 
 
+void print_warehouse_status(map<string, warehouse> &warehouses, map<string, item> &food_items);
+
 int main(int argc, const char* argv [])
 {
 	if(argc != 2)
@@ -162,4 +164,26 @@ int main(int argc, const char* argv [])
 		
 	}
 	return 0;
+}
+
+void print_warehouse_status(map<string, warehouse> &warehouses, map<string, item> &food_items)
+{
+	BOOST_FOREACH(item cur_item, food_items | boost::adaptors::map_values)
+	{
+		int num_stocked = 0;
+		BOOST_FOREACH(warehouse cur_warehouse, warehouses | boost::adaptors::map_values)
+		{
+			if(cur_warehouse.contains(cur_item))
+			{
+				cout << cur_warehouse.get_name() << " contains " << cur_item.get_name() << endl;
+				num_stocked++;
+				if(num_stocked >= 2){
+					break;
+				}
+			}
+			else{
+				cout << cur_warehouse.get_name() << " does not contain " << cur_item.get_name() << endl;
+			}
+		}
+	}
 }

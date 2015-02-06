@@ -58,14 +58,14 @@ void warehouse::request(item requested_item, int quantity)
 	bool done_removing = false;
 	while(!done_removing)
 	{
-		// Get the date of the oldest item in the inventory.
-		date oldest_date = get_soonest_date(requested_item);
-		// If the date is date(not_a_date_time) then there are none of the requested item in the inventory.
-		if(oldest_date.is_not_a_date())
-		{
+		// If the warehouse does not contain the item, we are done.
+		if(!contains(requested_item)){
 			done_removing = true;
 			break;
 		}
+		// Get the date of the oldest item in the inventory.
+		date oldest_date = get_soonest_date(requested_item);
+		// Get the quantity of the item with that date that are in the inventory.
 		int num_in_inventory = get_quantity(requested_item, oldest_date);
 		// Remove the requested quantity from the inventory.
 		remove_item(requested_item, oldest_date, quantity);
