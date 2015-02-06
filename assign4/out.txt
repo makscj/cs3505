@@ -1,0 +1,478 @@
+Report by Maks Cegielski-Johnson and John Ballard
+
+Unstocked Products:
+0000400094 value time hamburger pizza
+0026536630 danish apple pocket
+0167802905 cake donut variety
+0192262788 slim fast optima chocolate peanut
+0238578422 billy hatcher and the giant egg
+0324640842 savarin all method coffee
+0324746637 cup cakes chocolate
+0435471064 table talk lemon meringue
+0482508640 sierra mist diet orange
+0544808501 salmon fillet lemon
+0615518685 tomato spinach pasta salad
+0695361827 motts plus kids apple punch
+0782342351 jolly rancher fruit chew pops
+0834787933 apple pipe tobacco
+0889565367 golden hamburger rolls
+0890379496 chocolate chip cookies
+
+Well-Stocked Products:
+0000405471 country cheese cracker
+0001266845 diet slice orange
+0007273621 ball fruit jell pectin
+0007859997 sheet cake carrot
+0013696544 orange mint tictac
+0015304579 halls honey lemon
+0017323327 chuckles orange slices
+0017330153 lucky pasta spaghetti
+0019544089 spartan crunchy peanut butter
+0020732420 diet apple slice
+0023774742 everyday living ultra dish liquid green apple scent
+0025311947 fruit stripe assorted fruit
+0025852053 wild bean coffee
+0031074392 chestnut puree with vanilla
+0031336543 lucky pasta salad macaroni
+0033178313 lemon drink gal
+0034234831 honey lemon cough drops
+0037172360 deluxe lite vanilla bean
+0040385448 slice mandarin orange
+0041106096 aero chocolate truffle
+0044312190 lady lee sharp cheddar cheese
+0044818604 solid dark chocolate rabbit
+0052314642 grand truffles chocolate
+0052531160 cliff bar chocolate espresso
+0053324100 pep farm goldfish pizza
+0053952280 cake box lucky print
+0053967853 ball fruit jell brand pectin
+0054299017 fantasy vanilla finger cookie
+0055295531 brachs minute maid all natural fruit snacks
+0061811428 vanilla cookie candle
+0069076096 fruit works peach papaya
+0081653810 spartan shredded taco blend cheese
+0082211657 peanut butter crunch
+0083772960 shrimp egg rolls
+0085317103 al cheese cheddar
+0086011114 hopes double fudge cookies
+0086200588 sports edge fruit snacks
+0092709491 slice orange soda
+0093042924 lucky plain spaghetti sauce
+0099750255 crystal clear lemon lime diet soda
+0106784737 large cookie cake decor
+0107833416 splendid fancy assorted cookies
+0109777401 lady lee hamburger chips
+0112159068 western family medium grade aa eggs
+0113219513 cheese trio goldfish
+0115461835 os apple cinnamon muffin
+0115980932 minute maid orange
+0115981845 cella chocolate covered cherries
+0116173442 fudge brownie cookies
+0118552723 high protein peanut granola bars
+0123670195 curling ribbon egg
+0124774614 peanut butter clusters
+0126936885 supreme whole bean coffee
+0130812231 swiss miss hot cocoa lite
+0131500382 organic crunchy peanut butter
+0133837599 table talk apple pie
+0134369054 premier coffee liqueur
+0137125126 lucky pasta large shells
+0137293280 cob peanut butter cookie
+0138941296 grand union like eggs
+0145368604 lady lee cocoa crispy rice
+0145998962 oatmeal raisin cookies
+0146641660 cookie jar snowman
+0149097537 ralphs apple juice
+0150722218 meadow gold egg nog
+0153173248 world market texas turtle medium roast ground coffee
+0154667049 brachs orange slices
+0161551039 ice cream cake
+0164370605 lucky blue cheese dressing
+0165242170 swiss miss mike chocolate
+0168802002 just juice apple juice
+0172641109 wed cake tier carrot
+0173298428 boston cream cake
+0179348960 whoppers robin eggs malted mild candy
+0184536475 gold gate chick egg rolls
+0190169701 liners cake layer
+0191447714 skinner spaghetti thin enriched
+0191807846 lucky lemon seltzer
+0197234409 motts apple juice
+0200054971 lucky muenster cheese
+0204661190 chocolate eclair pie
+0206414780 egg roll pork
+0210730166 big fizz lemon lime pop
+0212772475 heath milk chocolate english toffee
+0223132887 motts apple sauce
+0225641383 lady lee apple juice
+0225765945 egg roll chicken
+0225853759 sugar free chocolate chip cookies with pecans
+0230144009 cake cutter servers
+0231796416 lucky pasta elbow macaroni
+0235535130 white rose apple juice
+0236145150 palmers cocoa butter tube
+0237638265 sh angel hair pasta
+0237901873 trader joe crunchy unsalted peanut butter
+0239204577 grand union low sugar cocoa
+0240352283 skinner spaghetti calcium rich
+0242503906 jolly rancher fruit chew
+0243130685 lucky fruit cocktail lite
+0243906944 trader joes french roast coffee beans
+0244004400 mixed fruit shipper
+0246683112 ocean spray orange juice
+0247208567 banana nut creme cake
+0249216613 cheese creme cake
+0249555852 apex protein cookie mint chip
+0250397317 apple snack pies
+0250879504 lemon meringue pie
+0251602770 lucky hot pepper jack cheese
+0255084073 chocolate pound cake
+0255576959 grand union pizza crust
+0257301614 chocolate cream pie
+0262648952 ice cream cake vanilla
+0263881036 golden pound cake
+0271939243 princes pure apple juice
+0274316181 fruit works apple rasp
+0278372323 cool classics vanilla cone
+0280465466 dove dark chocolate
+0281483777 trader joes organic light whipped cream cheese
+0283050228 sh thin spaghetti
+0284043451 optima vanilla shake
+0284423315 donut cake chocolate
+0286812829 gold gate shrimp egg roll
+0287394851 for maximum value chocolate chip cookies
+0289745973 skinner spaghetti enriched
+0291269980 lucky bleach lemon scent
+0291550251 easter egg sugar babies
+0293476553 apricot fruit tart
+0293802988 happy day orange juice
+0297888097 world market french roast dark roast ground coffee
+0298550760 upscale yogurt mousse cake
+0304497135 fruit salad stickers
+0305724832 deluxe sherbet orange
+0306403591 master choice pure vanilla extract
+0308529116 sh apple jelly
+0310948157 real lemon lemon juice
+0312318880 bounty dark chocolate
+0313403466 charlie and the chocolate factory
+0315481678 lady lee swiss cheese
+0317620112 sweet treat chocolate nut good
+0319343647 master choice apple cider
+0320194978 gold gate veg egg rolls
+0326084898 jumbo peanut butter cookie
+0328749203 pizza night pallet
+0330425495 pear al orange
+0333693387 lucky mini chocolate donuts
+0337611314 skinner egg noodles wide enriched
+0338310317 spartan lemon lime soda
+0341116387 ball fruit salsa mix
+0343045997 twin ultra fuel fruit
+0343640640 chocolate low fat milk
+0345595251 happy hippo cookie wafer bar
+0347460350 apple creme muffins
+0349746525 lady lee lite fruit cocktail
+0351299167 tigers milk peanut butter bar
+0351663921 home style pasta sauce mushroom
+0357144201 lucky devils food cake mix
+0357974991 black forest cake
+0358567752 lady lee cocoa comets
+0366272457 wooden slice and bake cookie set
+0367297526 pad for small bar cakes
+0367885369 cake order form
+0368493619 chocolate chip cookie
+0371751108 fresh branded orange juice
+0375664350 lucky fruit cocktail
+0379986664 am cookie cutter
+0381550496 clover valley orange soda
+0383305028 spartan natural apple juice
+0384510897 gen eggs jumbo
+0385486303 swiss miss milk chocolate
+0386708529 cob sugar cookie
+0387117147 zig zag orange with free orange lights
+0391573919 cup cakes white sweet ice
+0394858621 plain cake donuts
+0395038606 lucky apple dapples
+0396482338 birds eye pasta secrets three cheese
+0397240513 rocky top orange soda
+0400348006 bug juice orange
+0404790137 for maximum value fruit mix in light syrup
+0407415464 cake white sweet iced
+0408213951 hotel bar cheddar cheese sharp
+0408840697 golden gate goodies chocolate raisins
+0410008877 soya vanilla dessert in pots
+0418351408 kinder country creamy milk chocolate with crispy grains
+0418579998 torte flan cake peach
+0422868648 ley grand taro cake
+0425880957 princes pure orange juice
+0426205940 peanut treat suet food for wild birds
+0426363986 lean cuisine angel hair pasta
+0427799967 her pastel mini eggs
+0427847624 white rose orange juice
+0428346969 spartan apple juice
+0433373657 trident green apple fusion
+0434131691 meadow gold small curd cottage cheese
+0434971129 cake chocolate sweet iced
+0437168834 lady lee mixed fruit
+0438569928 western family lemon juice
+0440675195 brill carrot cake
+0442002742 vanilla cookie scented oil refill
+0446364954 lean cuisine baked cheese ravioli
+0457623511 pasta rings with franks
+0463797944 peanut butter nougat fluffs
+0465118894 muller light vanilla yogurt
+0466803099 chocolate covered mixed fruit
+0468022587 syrup slice mandarin orange
+0468822775 maple cheese bread dough
+0472970131 cake half sheet marble
+0473700810 western family lemon drops
+0475529981 french cheese cake
+0477812352 mountain dew game fuel wild fruit flavor
+0478721449 nellie black forest cake
+0478937694 world market hazelnut medium roast ground coffee
+0480309506 cocoa deli mixed berry crunch white chocolate lolly truffle
+0480563292 spartan coffee filters
+0481064075 slice one orange soda
+0481215539 diet coke lemon
+0489121452 lady lee fruit punch
+0490792752 dole apple juice
+0491263896 dawn cheese icing
+0491711148 classico tomato and basil pasta sauce
+0493267099 fruit cocktail in heavy syrup
+0494679310 lucky chunky fruit mix lite
+0494743095 cookies and cream cake
+0496620538 cake layers white
+0496785112 lady lee brick cream cheese
+0499326313 zig zag french orange
+0499465240 grand union apple juice
+0500786077 orchard fruit jelly beans
+0504057751 peanut raw tray
+0508073728 sheet cake german chocolate
+0509954066 spartan orange soda
+0519661222 assorted malted milk eggs
+0519904715 parade swiss cheese
+0519947894 table talk lemon pie
+0520822447 lemon oil duster
+0521471665 lean cuisine classic five cheese lasagna
+0525164874 fruit berries us postage stamps
+0525227187 fruit sampler basket
+0526626642 lemon pep catfish fillet
+0530782416 peach fruit pie
+0530895651 lucky lemon scent ammonia
+0536923647 serious ginseng fruit drink
+0537158897 swiss miss spiced apple cider mix
+0538763134 lucky pasta small shells
+0542633526 cake layers chocolate
+0545160703 payday peanut caramel bar
+0547269890 petites nail enamel cocoa
+0549416129 spartan shredded cheddar cheese
+0553260371 lucky sesame hamburger buns
+0554884780 cherry creme cake
+0555063725 nacho cheese tortilla chips
+0556467522 absolute vanilla vodka
+0561017395 soft cream cheese
+0561402750 mandarin orange slice
+0568919628 mountain dairy grade aa eggs
+0571979002 deco lemon cake roll
+0572739598 jumbo sugar cookie
+0575861899 golden grain spaghetti
+0578212420 zig zag king size french orange
+0581893891 brie gourmet cheese
+0583378408 lucky white cake mix
+0583793894 brachs cherry cordials milk chocolate covered cherries
+0591819282 brown gold decaf coffee
+0591972838 hopes sugar cookies
+0592264414 lemon creme muffins
+0592382869 cake parfait lid
+0596527691 eagle brand block chocolate
+0597748164 sugared cake donut holes
+0599516202 chocolate milk mix
+0601819888 swiss miss no sugar added hot cocoa
+0605690733 lucky fruit punch
+0605936671 fast set orange pipe cement
+0608681563 lady lee lemon lime drink
+0609069748 big time orange flavour drink
+0611406763 low carb cookies
+0612548925 veggie patch spiced apple sau
+0613653959 dutch hot cocoa mix
+0614219000 almond apricot and yogurt bar
+0620800736 just fruit salad
+0621399549 autocrat coffee syrup pints
+0622082514 trader joes organic mini peanut butter sandwich crackers
+0624148576 hopes raisin oatmeal cookies
+0628202542 cup cakes white
+0629355134 aurora vanilla granola
+0630258075 lucky vanilla caramels
+0634683824 pizza dough balls
+0639602355 fruit fresh display
+0641659335 king cole pasta rings in tomato sauce
+0642353471 kraft smooth peanut butter
+0642789989 brach spice jell eggs
+0643137165 lucky cinnamon apple sauce
+0644234205 fruit of the loom string bikini
+0646030660 dole sparkler orange
+0647352991 mars extra chocolate special edition drink
+0647826448 lucky peanut butter cup
+0650563992 one dozen grade aa eggs
+0653900258 sip lid plain for coffee cup
+0656231906 apple creme cake
+0657227499 peanut chicken salad
+0658767701 nestle coffee mate original
+0661917563 deluxe churned artisan vanilla bean light ice cream
+0662757098 skinner egg noodles medium enriched
+0675624570 brisk lemon iced tea
+0677852599 vanilla bean cocoa
+0679942597 ralphs lite mandarin oranges peeled segments in mandarin orange juice
+0681565423 pumpkin creme cake
+0683180970 ambrosia crumble puds devon custard with apple compote
+0684517682 lucky yellow cake mix
+0685887688 green apple rip rolls
+0687618812 lite lemon yogurt
+0689391681 amp energy juice orange
+0689899674 cookie jar dinner
+0692364631 danish butter cookies
+0694404956 just juice orange juice
+0695553519 palmers cocoa butter lotion
+0696760374 al cheese swiss
+0697421696 pur vanilla frosting
+0699268331 swiss miss no sugar added cocoa
+0702765029 skinner lone star pasta enriched
+0705546022 lucky lemon drops
+0707655013 coffee break coffee set
+0712267477 easter egg cake
+0712465857 bounty milk chocolate
+0712824206 jolly rancher bold fruit smoothie
+0715770389 sierra mist orange
+0716892810 chicken label lemon
+0723506147 soya chocolate dessert in pots
+0727977343 barilla pasta sauce marinara
+0729107097 western family mushroom and tomato pasta sauce
+0730495329 slim fast peanut butter
+0732200290 mamba lemon candy
+0734984557 grand union orange sherbert
+0735079435 kinder chocolate maxi bar
+0736735438 cheese sweet rolls
+0742171928 clover valley creamy peanut butter
+0742871225 chocolate fudge cake
+0743945395 chocolate with nuts
+0746251911 syrup slice lemon lime
+0748449897 jolly rancher fruit chews
+0749387671 classic cakes flapjack
+0751628544 sheet fruit basket white cake
+0751658109 al cheese muenster
+0751737314 jelly bean bird eggs
+0756850946 table cake white
+0757193864 elan frozen coffee yogurt
+0761473656 large white eggs
+0762385346 lucky orange soda
+0767726033 pur apple filling
+0768293567 angel food cake plain
+0770801781 lucky fruit snack whales world
+0771663016 the orange box
+0781577805 dextro energy lemon
+0781928107 mango fruit floes
+0783904214 swiss miss milk chocolate hot cocoa
+0784880862 cookie crisp cereal
+0786111814 cool classic vanilla cone
+0786592822 wedding cake kit
+0786765867 savarin auto coffee
+0788506939 angel food cake
+0790640421 zig zag king size french orange carton
+0793312910 brachs milk maid caramel apple candy corn
+0795699594 cream horns vanilla
+0800787263 hopes assorted cookies
+0801017301 bar cake combo plastic small
+0802220894 master choice apple pie
+0802910920 emerald cocoa roast almonds
+0803630789 viva light egg nog
+0805980869 chocolate chunk soft baked cookies
+0809976178 world market vanilla bean medium roast ground coffee
+0812357624 lemon cream pie
+0814257942 quaker hill farms chocolate chip cookies
+0815303771 heath ice cream bars milk chocolate english toffee
+0815773390 brach orange slices
+0815849014 dark chocolate espresso beans
+0817493060 hotel bar cheddar cheese longhorn style
+0821136578 lady lee cinnamon apple sauce
+0822445530 slim fast meal options chewy granola chocolate chip
+0828089547 nellie blackout layer cake
+0830638387 round cake team logo
+0833048479 barilla pasta sauce spicy pepper
+0835508019 gen eggs large
+0838431562 snickers chocolate bar
+0839636125 value time iced ginger cookies
+0840832098 muller fruit corner cherry
+0841960914 slim fast chocolate
+0848406091 syrup storm lemon lime
+0856622110 nordic ware original bundt cake mix zesty lemon
+0857409546 all sport fruit punch
+0861123400 walnut grove bottled water
+0861444908 cow fruit variety pack
+0863555499 upscale peachy yogurt mousse
+0864213933 cake board trim white
+0866223184 cheese creme muffins
+0870132805 danish cheese pocket
+0871615646 ensure high protein vanilla
+0871647834 lucky fruit punch soda
+0873737803 swiss miss hot cocoa mix milk chocolate
+0877644095 great value pure vanilla extract
+0880395624 lemon herb marinade
+0883180988 lucky sour fruit buttons
+0889402568 del monte mixed fruit in extra light syrup
+0890044443 savarin decaf coffee
+0893804260 acme whole wheat walnut
+0898437414 creamy cream cheese frosting
+0900872510 autocrat premium coffee
+0901501267 cake box white
+0903200227 lucky butter pound cake
+0908356935 deli cheese puffs
+0909872238 autocrat coffee syrup quart
+0910473511 jelly egg wrapped
+0911165853 easter lamb cake
+0917470073 apple cobbler mog bars
+0918001684 lady lee orange drink
+0921019931 apple sweet rolls
+0925604727 al cheese hot pepper
+0933005529 swiss miss hot chocolate
+0936471323 lean cuisine chicken al orange
+0936821261 lucky orange slices
+0937175728 fruit geyser peach
+0938546495 lemon creme cake
+0940485888 sh chocolate milk single
+0942456661 simply lite chocolate wafer
+0944673178 hotel bar cheddar cheese mild
+0944842704 lemon chicken breast
+0945136183 cake half sheet white
+0945448931 dessert shells fruit filled
+0947205694 hopes peanut butter cookies
+0948214543 western family thin spaghetti
+0949643804 fruit of the loom briefs
+0952606487 ralphs brand cocoa powder
+0954297117 classic five cheese lasagna
+0957310782 swiss miss hot cocoa mix
+0958569281 diet double chocolate chip
+0959057674 lees chocolate mint creme bar
+0960175833 skinner egg noodles extra wide enriched
+0960832011 lady lee pepper jack cheese
+0962025134 western family large eggs
+0962874845 orange tiny terror head
+0963630889 macaroni and cheese
+0964813077 diet lemon iced tea
+0965407347 crunchy peanut butter
+0965570368 copy cake charge
+0966516184 black cherry fruit on the bottom yogurt
+0967241282 seedy little currant cookies
+0967537199 swiss miss caramel cream hot cocoa mix
+0967654725 brach fruit slices
+0967705519 robin eggs malted milk candy
+0972671072 dynasty egg roll skin
+0972930382 lady lee muenster cheese
+0972936189 lady lee mild cheddar cheese
+0972973670 sweet treat peanut jots
+0976385222 classico sweet basil pasta sauce
+0980144389 chocolate meringue pie
+0981531849 father table combo pizza
+0985798697 fruit basket majestic
+0987987905 creamy peanut butter
+0995677803 premix mandarin orange
+0997864708 lady lee apple cider
+
