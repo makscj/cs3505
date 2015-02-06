@@ -11,6 +11,7 @@
 #include<boost/foreach.hpp>
 #include<sstream>
 #include<boost/algorithm/string.hpp>
+#include<boost/algorithm/string/trim.hpp>
 #include<boost/date_time/gregorian/gregorian.hpp>
 #include<boost/range/adaptor/map.hpp>
 
@@ -18,20 +19,30 @@ using namespace boost::gregorian;
 using namespace std;
 
 
-int main()
+int main(int argc, const char* argv [])
 {
+	if(argc != 2)
+	{
+		cout << "Usage: Requires one argument that is a data text file." << endl;
+		return 1;
+	}
 	date current_day;
 
 	map<string, item> food_items;
 	
 	map<string, warehouse> warehouses;
 	
-	ifstream in("data1.txt");
+	ifstream in(argv[1]);
+	
+	
 	while(true)
 	{
 		string next;
 		in >> next;
 		
+		if (in.fail())
+			break;
+			
 		if(next == "FoodItem")
 		{
 			item added_item (in);
@@ -41,7 +52,8 @@ int main()
 		{
 			string junk, name;
 			in >> junk;
-			in >> name;
+			getline(in, name);
+			boost::algorithm::trim(name);
 			warehouses[name] = warehouse(name);
 		}
 		else if(next == "Start")
@@ -121,6 +133,7 @@ int main()
 			cout << "Report by Maks Cegielski-Johnson and John Ballard" << endl;
 			cout << endl;
 			cout << "Unstocked Products:" << endl;
+			
 			BOOST_FOREACH(item cur_item, unstocked)
 			{
 				cout << cur_item << endl;
@@ -139,8 +152,7 @@ int main()
 			cout << "WRONG COMMAND: " << next << endl;
 		}
 		
-		if (in.fail())
-			break;
+
 		
 	}
 	return 0;
