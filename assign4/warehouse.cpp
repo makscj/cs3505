@@ -38,17 +38,17 @@ string warehouse::get_name(){
 // Receives a given quantity of a given item on a given date.
 void warehouse::receive(item new_item, date current_date, int quantity)
 {
-	BOOST_FOREACH(dated_item cur, inventory)
+	// Get the date the item expires.
+	date expiration_date = new_item.get_expiration_date(current_date);
+	BOOST_FOREACH(dated_item & cur, inventory)
 	{
-		// If we find a dated item with the same item and date, just increase the quantity of that item.
-		if(cur.get_item() == new_item && cur.get_date() == current_date)
+		// If we find a dated item with the same item and expiration date, just increase the quantity of that item.
+		if(cur.get_item() == new_item && cur.get_date() == expiration_date)
 		{
 			cur.add(quantity);
 			return;
 		}
 	}
-	// Get the date the item expires.
-	date expiration_date = new_item.get_expiration_date(current_date);
 	// Add a dated item containing the item to the inventory.
 	inventory.push_back(dated_item(new_item, expiration_date, quantity));
 }
@@ -88,17 +88,23 @@ void warehouse::request(item requested_item, int quantity)
 // Returns true if the warehouse contains and amount of the given item and false otherwise.
 bool warehouse::contains(item requested_item)
 {
-	return !get_soonest_date(requested_item).is_not_a_date();
+	BOOST_FOREACH(dated_item cur_item, inventory){
+		if (cur_item.get_item() == requested_item)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 // Removes all items from the warehouse that expire on or before the given date.
 void warehouse::clear_expired_items(date current_date)
 {
-	// Loop through the inventory and remove all the items with a date at or after the current date.
+	// Loop through the inventory and remove all the items with a date at or before the current date.
 	vector<dated_item>::iterator it = inventory.begin();
 	while(it != inventory.end())
 	{
-		if((*it).get_date() >= current_date){
+		if((*it).get_date() <= current_date){
 			it = inventory.erase(it);
 		}
 		else{
