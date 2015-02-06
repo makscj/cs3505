@@ -1,15 +1,18 @@
+/*
+* author - Maks Cegielski-Johnson
+* author - John Ballard
+* CS 3505 - Assignment 4
+* Main method. Parses a text file of data and will print out the results.
+*/
 #include "dated_item.h"
 #include "warehouse.h"
 #include "item.h"
 #include<fstream>
-#include<iterator>
 #include<iostream>
 #include<string>
 #include<map>
 #include<vector>
-#include<set>
 #include<boost/foreach.hpp>
-#include<sstream>
 #include<boost/algorithm/string.hpp>
 #include<boost/algorithm/string/trim.hpp>
 #include<boost/date_time/gregorian/gregorian.hpp>
@@ -18,50 +21,56 @@
 using namespace boost::gregorian;
 using namespace std;
 
-
+//Debugging method
 void print_warehouse_status(map<string, warehouse> &warehouses);
 
 
 int main(int argc, const char* argv [])
 {
+	//If we don't get a data file then stop.
 	if(argc != 2)
 	{
 		cout << "Usage: Requires one argument that is a data text file." << endl;
 		return 1;
 	}
+	//The current day of the system
 	date current_day;
-
+	//All the items that exist
 	map<string, item> food_items;
-	
+	//All the warehouses that exist
 	map<string, warehouse> warehouses;
-	
-	ifstream in(argv[1]);
-	
+	//The file reader
+	ifstream in(argv[1]);	
 	
 	while(true)
 	{
 		string next;
 		in >> next;
 		
+		//Break if the reader fails
 		if (in.fail())
 			break;
 			
 		if(next == "FoodItem")
 		{
+			//Deal with the file stream in item constructor
 			item added_item (in);
+			//Add the item to the map
 			food_items[added_item.get_code()] = added_item;
 		}
 		else if(next == "Warehouse")
 		{
 			string junk, name;
-			in >> junk;
+			in >> junk;//Deal with the junk
+			//Read the rest of the line for the warehouse
 			getline(in, name);
 			boost::algorithm::trim(name);
+			//Add the warehouse to the map
 			warehouses[name] = warehouse(name);
 		}
 		else if(next == "Start")
 		{
-			//Convert MM/DD/YYYY -> YY/MM/DD
+			//We want to convert MM/DD/YYYY -> YYYY/MM/DD
 			string junk, date_in;
 			in >> junk;
 			in >> date_in;
