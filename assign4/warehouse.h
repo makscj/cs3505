@@ -44,6 +44,8 @@ class warehouse
 	// Assignment operator
 	warehouse& operator=(const warehouse &rhs);
 	
+	void print_summary();
+	
 	private:
 	
 	//The name of the warehouse

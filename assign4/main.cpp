@@ -19,7 +19,32 @@ using namespace boost::gregorian;
 using namespace std;
 
 
-void print_warehouse_status(map<string, warehouse> &warehouses, map<string, item> &food_items);
+void print_warehouse_status(map<string, warehouse> &warehouses);
+
+
+int main2()
+{
+	/*
+	warehouse ware("City");
+	item banana("1", "banana", 3);
+	item taco("2", "taco", 1);
+	ware.receive(banana, from_string("2010/05/01"), 10);
+	ware.receive(taco, from_string("2010/05/01"), 10);
+	//cout << ware.contains(banana) << endl;
+	ware.print_summary();
+	ware.clear_expired_items(from_string("2010/05/02"));
+	ware.print_summary();
+	ware.request(banana, 5);
+	ware.print_summary();*/
+	map <string, int> map1;
+	
+	map1["hi"] = 3;
+	map1["hi"]++;
+	cout << map1["hi"] << endl;
+}
+
+
+
 
 int main(int argc, const char* argv [])
 {
@@ -68,7 +93,7 @@ int main(int argc, const char* argv [])
 			string date_string = "";
 			boost::split(date_array, date_in, boost::is_any_of("/"));
 			date_string = date_array[2] + "/" + date_array[0] + "/" + date_array[1];
-			current_day = from_simple_string(date_string);
+			current_day = from_string(date_string);
 			
 		}
 		else if(next == "Receive:")
@@ -79,9 +104,14 @@ int main(int argc, const char* argv [])
 			in >> quantity;
 			getline(in, warehouse_name);
 			boost::algorithm::trim(warehouse_name);
-			warehouse source = warehouses[warehouse_name];
+			warehouse dest = warehouses[warehouse_name];
 			item requested_item = food_items[upc];
-			source.receive(requested_item, current_day, quantity);
+			cout << "Before receive" << endl;
+			dest.print_summary();
+			dest.receive(requested_item, current_day, quantity);
+			cout << "Receiving " << quantity << " " << requested_item.get_name() << endl;
+			dest.print_summary();
+			warehouses[warehouse_name] = dest;
 		}
 		else if(next == "Request:")
 		{
@@ -94,15 +124,20 @@ int main(int argc, const char* argv [])
 			warehouse source = warehouses[warehouse_name];
 			item requested_item = food_items[upc];
 			source.request(requested_item, quantity);
+			cout << "Requesting " << quantity << " " << requested_item.get_name() << endl;
+			source.print_summary();
+			warehouses[warehouse_name] = source;
 		}
 		else if(next == "Next")
 		{
+			cout << "Next day" << endl;
+			print_warehouse_status(warehouses);
 			string junk;
 			// Get rid of the rest of the line
 			getline(in, junk);
 			date_duration dd(1);
 			current_day += dd;
-			BOOST_FOREACH(warehouse cur_warehouse, warehouses | boost::adaptors::map_values)
+			BOOST_FOREACH(warehouse &cur_warehouse, warehouses | boost::adaptors::map_values)
 			{
 				cur_warehouse.clear_expired_items(current_day);
 			}
@@ -161,29 +196,15 @@ int main(int argc, const char* argv [])
 		}
 		
 
-		
+	//print_warehouse_status(warehouses);
 	}
 	return 0;
 }
 
-void print_warehouse_status(map<string, warehouse> &warehouses, map<string, item> &food_items)
+void print_warehouse_status(map<string, warehouse> &warehouses)
 {
-	BOOST_FOREACH(item cur_item, food_items | boost::adaptors::map_values)
+	BOOST_FOREACH(warehouse cur_warehouse, warehouses | boost::adaptors::map_values)
 	{
-		int num_stocked = 0;
-		BOOST_FOREACH(warehouse cur_warehouse, warehouses | boost::adaptors::map_values)
-		{
-			if(cur_warehouse.contains(cur_item))
-			{
-				cout << cur_warehouse.get_name() << " contains " << cur_item.get_name() << endl;
-				num_stocked++;
-				if(num_stocked >= 2){
-					break;
-				}
-			}
-			else{
-				cout << cur_warehouse.get_name() << " does not contain " << cur_item.get_name() << endl;
-			}
-		}
+		cur_warehouse.print_summary();
 	}
 }

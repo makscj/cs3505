@@ -50,7 +50,8 @@ void warehouse::receive(item new_item, date current_date, int quantity)
 		}
 	}
 	// Add a dated item containing the item to the inventory.
-	inventory.push_back(dated_item(new_item, expiration_date, quantity));
+	dated_item d_item(new_item, expiration_date, quantity);
+	inventory.push_back(d_item);
 }
 
 void warehouse::request(item requested_item, int quantity)
@@ -172,4 +173,15 @@ date warehouse::get_soonest_date(item requested_item)
 		}
 	}
 	return soonest_date;
+}
+
+void warehouse::print_summary()
+{
+	cout << city_name << " contains:" << endl;
+	BOOST_FOREACH(dated_item cur, inventory)
+	{
+		cout << cur.get_quantity() << " of " << cur.get_item().get_name() << endl;
+	}
+	cout << "----------------------------------------" << endl;
+	cout << endl;
 }
