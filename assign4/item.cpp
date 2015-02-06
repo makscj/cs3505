@@ -1,3 +1,9 @@
+/*
+* author - Maks Cegielski-Johnson
+* author - John Ballard
+* CS 3505 - Assignment 4
+* Item object, encapsulates the name of an item, the UPC code, and shelf life
+*/
 #include <string>
 #include <fstream>
 #include <boost/date_time/gregorian/gregorian.hpp>
@@ -8,6 +14,7 @@
 
 using namespace std;
 
+//Constructor
 item::item(string upc, string _name, int _shelf_life)
 {
 	this->code = upc;
@@ -41,11 +48,13 @@ item::item(ifstream &stream)
 	boost::algorithm::trim(this->name);
 }
 
+//Copy constructor
 item::item(const item &other)
 {
 	*this = other;
 }
 
+//Default constructor
 item::item()
 {
 	code = "";
@@ -53,21 +62,24 @@ item::item()
 	shelf_life = 0;
 }
 
+//Destructor
 item::~item()
 {
 }
 
+//Return name of item
 string item::get_name() const
 {
 	return name;
 }
 
-
+//Return UPC code of item
 string item::get_code() const
 {
 	return code;
 }
 
+//Return if the expiration date of the item
 boost::gregorian::date item::get_expiration_date(boost::gregorian::date _date) const
 {
 	boost::gregorian::date_duration duration(shelf_life);
@@ -75,18 +87,20 @@ boost::gregorian::date item::get_expiration_date(boost::gregorian::date _date) c
 	return _date + duration;
 }
 
+//Equals operator, compares UPC codes.
 bool item::operator== (const item & rhs) const
 {
 	return code == rhs.code;
 }
 
+//Assignment operator
 item& item::operator= (const item &rhs){
 	code = rhs.code;
 	name = rhs.name;
 	shelf_life = rhs.shelf_life;
 	return *this;
 }
-
+//Stream output << operator
 std::ostream& operator<<(std::ostream &stream, const item &_item)
 {
 	string output = _item.code + " "+ _item.name;

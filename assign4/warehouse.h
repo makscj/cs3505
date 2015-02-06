@@ -1,8 +1,13 @@
+/*
+* author - Maks Cegielski-Johnson
+* author - John Ballard
+* CS 3505 - Assignment 4
+* Warehouse object, encapsulates a warehouse that contains a collection of
+* dated items that can expire.
+*/
 
 #ifndef WAREHOUSE_H
 #define WAREHOUSE_H
-
-
 #include "dated_item.h"
 #include "item.h"
 #include <string>
@@ -40,10 +45,11 @@ class warehouse
 	warehouse& operator=(const warehouse &rhs);
 	
 	private:
+	
+	//The name of the warehouse
 	std::string city_name;
 	//Map of the items in the inventory and how many there are
 	std::vector<dated_item> inventory;
-	
 	// Removes the given quantity of the given item with the given date from the inventory.
 	void remove_item(item requested_item, boost::gregorian::date expiration_date, int quantity);
 	// Gets the quantity of the given item with the given date.
