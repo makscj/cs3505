@@ -22,6 +22,8 @@ class warehouse
 	// Destructor
 	~warehouse();
 	
+	std::string get_name();
+	
 	//The item, date, and quantity
 	void receive(item, boost::gregorian::date, int);
 	

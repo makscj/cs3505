@@ -31,6 +31,10 @@ warehouse::~warehouse()
 	
 }
 
+string warehouse::get_name(){
+	return city_name;
+}
+
 // Receives a given quantity of a given item on a given date.
 void warehouse::receive(item new_item, date current_date, int quantity)
 {
@@ -91,10 +95,14 @@ bool warehouse::contains(item requested_item)
 void warehouse::clear_expired_items(date current_date)
 {
 	// Loop through the inventory and remove all the items with a date at or after the current date.
-	for(vector<dated_item>::iterator it = inventory.begin(); it != inventory.end(); it++)
+	vector<dated_item>::iterator it = inventory.begin();
+	while(it != inventory.end())
 	{
 		if((*it).get_date() >= current_date){
 			it = inventory.erase(it);
+		}
+		else{
+			it++;
 		}
 	}
 }
@@ -151,7 +159,7 @@ date warehouse::get_soonest_date(item requested_item)
 	{
 		if(_item.get_item() == requested_item)
 		{
-			if(soonest_date == date(not_a_date_time) || _item.get_date() < soonest_date)
+			if(soonest_date.is_not_a_date() || _item.get_date() < soonest_date)
 			{
 				soonest_date = _item.get_date();
 			}

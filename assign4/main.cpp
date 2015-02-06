@@ -116,10 +116,14 @@ int main(int argc, const char* argv [])
 				{
 					if(cur_warehouse.contains(cur_item))
 					{
+						cout << cur_warehouse.get_name() << " contains " << cur_item.get_name() << endl;
 						num_stocked++;
 						if(num_stocked >= 2){
 							break;
 						}
+					}
+					else{
+						cout << cur_warehouse.get_name() << " does not contain " << cur_item.get_name() << endl;
 					}
 				}
 				if(num_stocked >= 2)
