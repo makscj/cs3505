@@ -16,22 +16,27 @@ warehouse::warehouse(string name)
 	city_name = name;
 }
 
+// Copy constructor - copies another warehouse.
 warehouse::warehouse(const warehouse &other)
 : city_name(other.city_name), inventory(other.inventory)
 {
 }
 
+// Default constructor. Creates a warehouse with no name.
 warehouse::warehouse()
 {
 	city_name = "";
 }
 
+// Destructor
 warehouse::~warehouse()
 {
 	
 }
 
-string warehouse::get_name(){
+// Gets the name of this warehouse.
+string warehouse::get_name()
+{
 	return city_name;
 }
 
@@ -54,6 +59,8 @@ void warehouse::receive(item new_item, date current_date, int quantity)
 	inventory.push_back(d_item);
 }
 
+// Reqests the given quantity of the given item. If there is less of the item than is requested,
+// the remainder of the request is ignored.
 void warehouse::request(item requested_item, int quantity)
 {
 	bool done_removing = false;
@@ -114,6 +121,7 @@ void warehouse::clear_expired_items(date current_date)
 	}
 }
 
+// Overloaded assignment operator. Copies another warehouse.
 warehouse& warehouse::operator=(const warehouse &rhs)
 {
 	city_name = rhs.city_name;
@@ -125,9 +133,10 @@ warehouse& warehouse::operator=(const warehouse &rhs)
 // If the item would have a 0 or negative quantity after the removal, the item is removed from the inventory vector
 void warehouse::remove_item(item requested_item, date expiration_date, int quantity)
 {
-	vector<vector<dated_item>::iterator> to_remove;
+	// Loop through the vector
 	for(vector<dated_item>::iterator it = inventory.begin(); it != inventory.end(); it++)
 	{
+		// If the dated_item has the correct item and date, remove the appropriate amount
 		if((*it).get_item() == requested_item && (*it).get_date() == expiration_date)
 		{
 			if((*it).get_quantity() <= quantity)
@@ -175,6 +184,7 @@ date warehouse::get_soonest_date(item requested_item)
 	return soonest_date;
 }
 
+// Debugging method. Prints a summary of all the items in the warehouse.
 void warehouse::print_summary()
 {
 	cout << city_name << " contains:" << endl;
