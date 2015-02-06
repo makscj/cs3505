@@ -58,23 +58,39 @@ int main()
 		}
 		else if(next == "Receive:")
 		{
-			
+			string upc, warehouse_name;
+			int quantity;
+			in >> upc;
+			in >> quantity;
+			in >> warehouse_name;
+			warehouse source = warehouses[warehouse_name];
+			item requested_item = food_items[upc];
+			source.receive(requested_item, current_date, quantity);
 		}
 		else if(next == "Request:")
 		{
-			
+			string upc, warehouse_name;
+			int quantity;
+			in >> upc;
+			in >> quantity;
+			in >> warehouse_name;
+			warehouse source = warehouses[warehouse_name];
+			item requested_item = food_items[upc];
+			source.request(requested_item, quantity);
 		}
 		else if(next == "Next")
 		{
-			
+			date_duration dd(1);
+			current_day += dd;
 		}
 		else if(next == "End")
 		{
-			
+			// print shit
+			break;
 		}
 		else
 		{
-			
+			cout << "WRONG COMMAND" << endl;
 		}
 		
 		if (in.fail())
