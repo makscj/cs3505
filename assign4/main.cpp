@@ -25,11 +25,6 @@ int main2()
 	
 	map<string, warehouse> warehouses;
 	
-	set<string> heads;	
-
-	
-	string headers [7] = {"FoodItem", "Warehouse", "Start date", "Receive", "Request", "Next day", "End"};
-	
 	ifstream in("data1.txt");
 	while(true)
 	{
@@ -38,7 +33,8 @@ int main2()
 		
 		if(next == "FoodItem")
 		{
-			
+			item added_item (in);
+			food_items[added_item.get_code()] = added_item;
 		}
 		else if(next == "Warehouse")
 		{
