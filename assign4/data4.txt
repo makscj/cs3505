@@ -1,0 +1,11 @@
+FoodItem - UPC Code: 0353264991  Shelf life: 10  Name: chestnut puree with vanilla
+FoodItem - UPC Code: 0984523912  Shelf life: 1  Name: the orange box
+Warehouse - Salt Lake City
+Warehouse - Provo
+Start date: 02/06/2015
+Receive: 0984523912 7 Salt Lake City
+Receive: 0353264991 6 Provo
+Next day:
+Receive: 0353264991 10 Salt Lake City
+Request: 0984523912 3 Provo
+End
