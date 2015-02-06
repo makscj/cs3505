@@ -17,7 +17,7 @@ using namespace boost::gregorian;
 using namespace std;
 
 
-int main2()
+int main()
 {
 	date current_day;
 
@@ -45,10 +45,16 @@ int main2()
 		}
 		else if(next == "Start")
 		{
-			string junk, date;
+			//Convert MM/DD/YYYY -> YY/MM/DD
+			string junk, date_in;
 			in >> junk;
-			in >> date;
-			// TODO finish
+			in >> date_in;
+			vector<string> date_array;
+			string date_string = "";
+			boost::split(date_array, date_in, boost::is_any_of("/"));
+			date_string = date_array[2] + "/" + date_array[0] + "/" + date_array[1];
+			current_day = from_simple_string(date_string);
+			
 		}
 		else if(next == "Receive:")
 		{
@@ -71,12 +77,15 @@ int main2()
 			
 		}
 		
+		if (in.fail())
+			break;
+		
 	}
 	return 0;
 }
 
 
-int main(){
+int main2(){
 	date current_day;
 	
 	map<string, item> food_items;
