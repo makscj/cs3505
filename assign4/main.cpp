@@ -75,7 +75,8 @@ int main(int argc, const char* argv [])
 			int quantity;
 			in >> upc;
 			in >> quantity;
-			in >> warehouse_name;
+			getline(in, warehouse_name);
+			boost::algorithm::trim(warehouse_name);
 			warehouse source = warehouses[warehouse_name];
 			item requested_item = food_items[upc];
 			source.receive(requested_item, current_day, quantity);
@@ -86,7 +87,8 @@ int main(int argc, const char* argv [])
 			int quantity;
 			in >> upc;
 			in >> quantity;
-			in >> warehouse_name;
+			getline(in, warehouse_name);
+			boost::algorithm::trim(warehouse_name);
 			warehouse source = warehouses[warehouse_name];
 			item requested_item = food_items[upc];
 			source.request(requested_item, quantity);
