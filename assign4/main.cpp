@@ -42,11 +42,17 @@ int main2()
 		}
 		else if(next == "Warehouse")
 		{
-			
+			string junk, name;
+			in >> junk;
+			in >> name;
+			warehouses[name] = warehouse(name);
 		}
 		else if(next == "Start")
 		{
-			
+			string junk, date;
+			in >> junk;
+			in >> date;
+			// TODO finish
 		}
 		else if(next == "Receive:")
 		{

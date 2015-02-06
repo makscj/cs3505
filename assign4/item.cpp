@@ -14,20 +14,27 @@ item::item(string upc, string _name, int _shelf_life)
 	this->shelf_life = _shelf_life;
 }
 
+// Constructor that takes an input stream from which the
+// "FoodItem" has been read and creates an item using the remainder of the line.
 item::item(ifstream &stream)
 {
+	// String to hold junk words from the file that we do not need.
 	string junk;
+	// Get rid of the first 3 words
 	for(int i = 0; i < 3; i++)
 	{
 		stream >> junk;
 	}
+	// Save the fourth string as the code
 	stream >> this->code;
 	for(int i = 0; i < 2; i++)
 	{
 		stream >> junk;
 	}
+	// Save the 7th item as the shelf life.
 	stream >> this->shelf_life;
 	stream >> junk;
+	// Save the remainder of the line as the name
 	getline(stream, this->name);
 	
 }
