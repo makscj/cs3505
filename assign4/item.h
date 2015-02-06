@@ -9,6 +9,7 @@
 #define ITEM_H
 
 #include<string>
+#include<fstream>
 #include <boost/date_time/gregorian/gregorian.hpp>
 
 
@@ -19,6 +20,7 @@ class item
 	//The UPC code, The name, and the shelf life
 	item(std::string, std::string, int);
 	item(const item &other);
+	item(std::ifstream &stream);
 	item();
 	
 	~item();

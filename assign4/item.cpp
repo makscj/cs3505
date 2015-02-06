@@ -1,4 +1,5 @@
 #include <string>
+#include <fstream>
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include "warehouse.h"
 #include "item.h"
@@ -11,6 +12,24 @@ item::item(string upc, string _name, int _shelf_life)
 	this->code = upc;
 	this->name = _name;
 	this->shelf_life = _shelf_life;
+}
+
+item::item(ifstream &stream)
+{
+	string junk;
+	for(int i = 0; i < 3; i++)
+	{
+		stream >> junk;
+	}
+	stream >> this->code;
+	for(int i = 0; i < 2; i++)
+	{
+		stream >> junk;
+	}
+	stream >> this->shelf_life;
+	stream >> junk;
+	getline(stream, this->name);
+	
 }
 
 item::item(const item &other)
