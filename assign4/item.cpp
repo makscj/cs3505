@@ -1,6 +1,7 @@
 #include <string>
 #include <fstream>
 #include <boost/date_time/gregorian/gregorian.hpp>
+#include <boost/algorithm/string/trim.hpp>
 #include "warehouse.h"
 #include "item.h"
 #include "dated_item.h"
@@ -27,6 +28,7 @@ item::item(ifstream &stream)
 	}
 	// Save the fourth string as the code
 	stream >> this->code;
+	boost::algorithm::trim(this->code);
 	for(int i = 0; i < 2; i++)
 	{
 		stream >> junk;
@@ -36,7 +38,7 @@ item::item(ifstream &stream)
 	stream >> junk;
 	// Save the remainder of the line as the name
 	getline(stream, this->name);
-	
+	boost::algorithm::trim(this->name);
 }
 
 item::item(const item &other)
@@ -88,5 +90,5 @@ item& item::operator= (const item &rhs){
 std::ostream& operator<<(std::ostream &stream, const item &_item)
 {
 	string output = _item.code + " "+ _item.name;
-	stream << output;
+	return stream << output;
 }
