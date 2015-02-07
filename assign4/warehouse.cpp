@@ -1,3 +1,11 @@
+/*
+* author - Maks Cegielski-Johnson
+* author - John Ballard
+* CS 3505 - Assignment 4
+* Warehouse object, encapsulates a warehouse that contains a collection of
+* dated items that can expire.
+*/
+
 #include <string>
 #include <vector>
 #include <iostream>
@@ -67,7 +75,8 @@ void warehouse::request(item requested_item, int quantity)
 	while(!done_removing)
 	{
 		// If the warehouse does not contain the item, we are done.
-		if(!contains(requested_item)){
+		if(!contains(requested_item))
+		{
 			done_removing = true;
 			break;
 		}
@@ -96,7 +105,8 @@ void warehouse::request(item requested_item, int quantity)
 // Returns true if the warehouse contains and amount of the given item and false otherwise.
 bool warehouse::contains(item requested_item)
 {
-	BOOST_FOREACH(dated_item cur_item, inventory){
+	BOOST_FOREACH(dated_item cur_item, inventory)
+	{
 		if (cur_item.get_item() == requested_item)
 		{
 			return true;
@@ -112,10 +122,12 @@ void warehouse::clear_expired_items(date current_date)
 	vector<dated_item>::iterator it = inventory.begin();
 	while(it != inventory.end())
 	{
-		if((*it).get_date() <= current_date){
+		if((*it).get_date() <= current_date)
+		{
 			it = inventory.erase(it);
 		}
-		else{
+		else
+		{
 			it++;
 		}
 	}

@@ -24,7 +24,6 @@ using namespace std;
 //Debugging method
 void print_warehouse_status(map<string, warehouse> &warehouses);
 
-
 int main(int argc, const char* argv [])
 {
 	//If we don't get a data file then stop.
@@ -70,19 +69,21 @@ int main(int argc, const char* argv [])
 		}
 		else if(next == "Start")
 		{
-			//We want to convert MM/DD/YYYY -> YYYY/MM/DD
+			//Get the start date of the process 
 			string junk, date_in;
 			in >> junk;
 			in >> date_in;
 			vector<string> date_array;
 			string date_string = "";
 			boost::split(date_array, date_in, boost::is_any_of("/"));
+			//We want to convert MM/DD/YYYY -> YYYY/MM/DD
 			date_string = date_array[2] + "/" + date_array[0] + "/" + date_array[1];
 			current_day = from_string(date_string);
 			
 		}
 		else if(next == "Receive:")
 		{
+			//Receiving a new shipment of items to a warehouse
 			string upc, warehouse_name;
 			int quantity;
 			in >> upc;
@@ -96,6 +97,7 @@ int main(int argc, const char* argv [])
 		}
 		else if(next == "Request:")
 		{
+			//Getting a request to send a shipment of items out of a warehouse
 			string upc, warehouse_name;
 			int quantity;
 			in >> upc;
@@ -109,6 +111,7 @@ int main(int argc, const char* argv [])
 		}
 		else if(next == "Next")
 		{
+			//Increment to the next day
 			string junk;
 			// Get rid of the rest of the line
 			getline(in, junk);
@@ -121,6 +124,7 @@ int main(int argc, const char* argv [])
 		}
 		else if(next == "End")
 		{
+			//No more transactions to be read, print out the well stocked and unstocked items.
 			vector<item> well_stocked;
 			vector<item> unstocked;
 			BOOST_FOREACH(item cur_item, food_items | boost::adaptors::map_values)
@@ -167,13 +171,10 @@ int main(int argc, const char* argv [])
 		{
 			cout << "WRONG COMMAND: " << next << endl;
 		}
-		
-
-	//print_warehouse_status(warehouses);
 	}
 	return 0;
 }
-
+//Debugging method
 void print_warehouse_status(map<string, warehouse> &warehouses)
 {
 	BOOST_FOREACH(warehouse cur_warehouse, warehouses | boost::adaptors::map_values)
