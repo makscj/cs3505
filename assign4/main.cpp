@@ -2,7 +2,7 @@
 * author - Maks Cegielski-Johnson
 * author - John Ballard
 * CS 3505 - Assignment 4
-* Main method. Parses a text file of data and will print out the results.
+* Main method. Parses a text file of data and will print out the results. 
 */
 #include "dated_item.h"
 #include "warehouse.h"
@@ -64,7 +64,7 @@ int main(int argc, const char* argv [])
 			//Read the rest of the line for the warehouse
 			getline(in, name);
 			boost::algorithm::trim(name);
-			//Add the warehouse to the map
+			//Add the warehouse to the map 
 			warehouses[name] = warehouse(name);
 		}
 		else if(next == "Start")
