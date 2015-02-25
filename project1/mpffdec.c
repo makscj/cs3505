@@ -16,7 +16,7 @@ TODO ADD COMMENTS PLEASE
 AVCodec ff_mpff_decoder = {
 
   .name = "mpff",
-  .long_name = NULL_IF_CONFIG_SMALL("MAKS PHOTO FILE FORMAT"),
+  .long_name = NULL_IF_CONFIG_SMALL("MPFF image (a cs 3505 project)"),
   .type = AVMEDIA_TYPE_VIDEO,
   .id = AV_CODEC_ID_BMP,
 };

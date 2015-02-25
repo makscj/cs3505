@@ -16,7 +16,7 @@ CS 3505 Spring 2015
 
 AVCodec ff_mpff_encoder = {
   .name = "mpff",
-  .long_name = NULL_IF_CONFIG_SMALL("MAKS PHOTO FILE FORMAT"),
+  .long_name = NULL_IF_CONFIG_SMALL("MPFF image (a CS 3505 project)"),
   .type = AVMEDIA_TYPE_VIDEO,
   .id = AV_CODEC_ID_MPFF,
 };
