@@ -1,15 +1,28 @@
 /*
-MPFF image format decoder
-
-TODO ADD COMMENTS PLEASE
-*/
-
+ * BMP image format decoder
+ * Copyright (c) 2015 John Ballard and Maks Cegielski-Johnson
+ *
+ * This file is part of FFmpeg. Created for CS 3505.
+ *
+ * FFmpeg is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * FFmpeg is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with FFmpeg; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ */
 
 #include <inttypes.h>
 
 #include "avcodec.h"
 #include "bytestream.h"
-#include "bmp.h"
 #include "internal.h"
 #include "msrledec.h"
 
@@ -23,7 +36,6 @@ static int mpff_decode_frame(AVCodecContext *avctx,
     unsigned int fsize, hsize;
     int width, height;
     unsigned int depth;
-    BiCompression comp; // WE NEED THE H FILE FOR THIS
     unsigned int ihsize;
     int i, n, linesize, ret;
     uint8_t *ptr;
@@ -35,6 +47,7 @@ static int mpff_decode_frame(AVCodecContext *avctx,
         return AVERROR_INVALIDDATA;
     }
 
+    //Checking the first few characters for a magic number :|
     if (bytestream_get_byte(&buf) != 'M' ||
         bytestream_get_byte(&buf) != 'P' ||
 	bytestream_get_byte(&buf) != 'F' ||
@@ -43,10 +56,12 @@ static int mpff_decode_frame(AVCodecContext *avctx,
         return AVERROR_INVALIDDATA;
     }
 
+    //File size
     fsize = bytestream_get_le32(&buf);
 
-    //Is this Boggle.h?
-    //Is this just Fanta.c?
+    //Is this the_real_life.h?
+    //Is this just fanta.c? 
+
 
     if (buf_size < fsize) {
         av_log(avctx, AV_LOG_ERROR, "not enough space (%d < %u), trying to decode anyway, Help us Peter\n",
@@ -57,7 +72,6 @@ static int mpff_decode_frame(AVCodecContext *avctx,
     hsize  = bytestream_get_le32(&buf); /* header size */
     ihsize = bytestream_get_le32(&buf); /* info header size */
 
-    
     if (ihsize + 12LL > hsize) {
         av_log(avctx, AV_LOG_ERROR, "invalid header size %u\n", hsize);
         return AVERROR_INVALIDDATA;
@@ -65,7 +79,7 @@ static int mpff_decode_frame(AVCodecContext *avctx,
 
     /* sometimes file size is set to some headers size, set a real size in that case */
     if (fsize == 12 || fsize == ihsize + 12)
-      fsize = buf_size - 2; //EXCUSE ME?
+      fsize = buf_size - 2;
 
     if (fsize <= hsize) {
         av_log(avctx, AV_LOG_ERROR,
@@ -74,32 +88,33 @@ static int mpff_decode_frame(AVCodecContext *avctx,
         return AVERROR_INVALIDDATA;
     }
 
-
+    //Get data from stream
     width  = bytestream_get_le32(&buf);
     height = bytestream_get_le32(&buf);
     depth = bytestream_get_le16(&buf);
 
-    //TODO WHAT THE FUCK
-    comp = BMP_RGB;
-
- 
+    //Set context data
     avctx->width  = width;
-    avctx->height = height > 0 ? height : -height;
-
+    avctx->height = height;
     avctx->pix_fmt = AV_PIX_FMT_BGR24;
 
+    //If there is not enough space then return a negative value to indicate failure
     if ((ret = ff_get_buffer(avctx, p, 0)) < 0)
         return ret;
 
+    //Import picture data set
     p->pict_type = AV_PICTURE_TYPE_I;
     p->key_frame = 1;
 
+    //Point the buffer to the start of the picture data (after the header)
     buf   = buf0 + hsize;
+    //dsize - d-"rest of the image"_size :D
     dsize = buf_size - hsize;
 
     /* Line size in file multiple of 4 */
     n = ((avctx->width * depth + 31) / 8) & ~3;
 
+    //Check if there is a data error 
     if (n * avctx->height > dsize) {
       n = (avctx->width * depth + 7) / 8;
       if (n * avctx->height > dsize) {
@@ -110,16 +125,12 @@ static int mpff_decode_frame(AVCodecContext *avctx,
       av_log(avctx, AV_LOG_ERROR, "data size too small, assuming missing line alignment\n");
     }
 
-    if (height > 0) {
-      ptr      = p->data[0] + (avctx->height - 1) * p->linesize[0];
-      linesize = -p->linesize[0];
-    } else {
-      ptr      = p->data[0];
-      linesize = p->linesize[0];
-    }
-
+    //Set the pointer to the start of the picture data
+    ptr      = p->data[0];
+    //Get the linesize
+    linesize = p->linesize[0];
     
-    
+    //If not a bit count of 24 then an error has occured
     switch (depth) {
     case 24:
       for (i = 0; i < avctx->height; i++) {
@@ -133,7 +144,6 @@ static int mpff_decode_frame(AVCodecContext *avctx,
       return AVERROR_INVALIDDATA;
     }
 
-
     *got_frame = 1;
 
     return buf_size;
@@ -146,6 +156,6 @@ AVCodec ff_mpff_decoder = {
   .name = "mpff",
   .long_name = NULL_IF_CONFIG_SMALL("MPFF image (a CS 3505 project)"),
   .type = AVMEDIA_TYPE_VIDEO,
-  .id = AV_CODEC_ID_BMP,
+  .id = AV_CODEC_ID_MPFF,
   .decode = mpff_decode_frame,
 };
