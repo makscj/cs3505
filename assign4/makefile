@@ -1,4 +1,5 @@
-
+#authors: Maks Cegielski-Johnson and John Ballard
+#cs3505 - Assignment 4 Makefile
 
 a.out:	warehouse.o item.o dated_item.o main.o 
 	g++ warehouse.o item.o dated_item.o main.o -lboost_date_time
