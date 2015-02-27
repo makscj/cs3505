@@ -1,5 +1,5 @@
 /*
- * BMP image format decoder
+ * MPFF image format decoder
  * Copyright (c) 2015 John Ballard and Maks Cegielski-Johnson
  *
  * This file is part of FFmpeg. Created for CS 3505.
