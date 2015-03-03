@@ -67,7 +67,7 @@ static int mpff_encode_frame(AVCodecContext *avctx, AVPacket *pkt,
     int n_bytes_image, n_bytes_per_row, n_bytes, i, hsize, ret;
     int pad_bytes_per_row, pal_entries = 0;
     const uint32_t *pal = NULL;
-    uint32_t palette256[256];//DO WE?
+    uint32_t palette256[256];
     int bit_count = avctx->bits_per_coded_sample;
     //Pointers for the buffer
     uint8_t *ptr, *buf;
@@ -97,7 +97,7 @@ static int mpff_encode_frame(AVCodecContext *avctx, AVPacket *pkt,
 #define SIZE_BITMAPINFOHEADER 18 //Define a constant for the size of the information header
 
     //Get the total header size
-    hsize = SIZE_BITMAPFILEHEADER + SIZE_BITMAPINFOHEADER; 
+    hsize = SIZE_BITMAPFILEHEADER + SIZE_BITMAPINFOHEADER + pal_entries * 4; 
     
     //Total bytes
     n_bytes = n_bytes_image + hsize;
