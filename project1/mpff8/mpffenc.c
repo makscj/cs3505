@@ -31,7 +31,7 @@ Initialize the encoder, will check if we are given the correct pixel format.
 */
 static av_cold int mpff_encode_init(AVCodecContext *avctx){
     
-	//Currently we only support BGR24 so if any other format appears then we want to throw an exception
+	//Currently we only support RGB8 so if any other format appears then we want to throw an exception
 	if(avctx->pix_fmt == AV_PIX_FMT_RGB8)
 	{
 		avctx->bits_per_coded_sample = 8;
@@ -92,11 +92,11 @@ static int mpff_encode_frame(AVCodecContext *avctx, AVPacket *pkt,
     //Get the number of bytes in the image 
     n_bytes_image = avctx->height * (n_bytes_per_row + pad_bytes_per_row);
 
-#define SIZE_BITMAPFILEHEADER 12 //Define a constant for the size of the file header
-#define SIZE_BITMAPINFOHEADER 18 //Define a constant for the size of the information header
+#define SIZE_FILEHEADER 12 //Define a constant for the size of the file header
+#define SIZE_INFOHEADER 18 //Define a constant for the size of the information header
 
-    //Get the total header size
-    hsize = SIZE_BITMAPFILEHEADER + SIZE_BITMAPINFOHEADER + pal_entries * 4; 
+    //Get the total header size (file header + info header + pallette size)
+    hsize = SIZE_FILEHEADER + SIZE_INFOHEADER + pal_entries * 4; 
     
     //Total bytes
     n_bytes = n_bytes_image + hsize;
@@ -118,12 +118,13 @@ static int mpff_encode_frame(AVCodecContext *avctx, AVPacket *pkt,
     bytestream_put_le32(&buf, n_bytes);               // Number of bytes in the file
     bytestream_put_le32(&buf, hsize);                 // The size of the total header
     //Start of info header
-    bytestream_put_le32(&buf, SIZE_BITMAPINFOHEADER); // This size of the info header`
+    bytestream_put_le32(&buf, SIZE_INFOHEADER); // This size of the info header`
     bytestream_put_le32(&buf, avctx->width);          // Width of the image
     bytestream_put_le32(&buf, avctx->height);         // Height of the image 
     bytestream_put_le16(&buf, bit_count);             // Depth of the image 
     bytestream_put_le32(&buf, n_bytes_image);         // The size of the image
-    for (i = 0; i < pal_entries; i++)
+    // Write the color pallette
+	for (i = 0; i < pal_entries; i++)
       {
         bytestream_put_le32(&buf, pal[i] & 0xFFFFFF);
       }

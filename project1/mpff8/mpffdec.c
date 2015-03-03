@@ -70,10 +70,6 @@ static int mpff_decode_frame(AVCodecContext *avctx,
 
     //File size
     fsize = bytestream_get_le32(&buf);
-
-    //Is this the_real_life.h?
-    //Is this just fanta.c? 
-
 	
 	//If the size of the buffer is less than the size of the file
 	//BMP tried to decode so we will as well.
@@ -91,12 +87,6 @@ static int mpff_decode_frame(AVCodecContext *avctx,
         av_log(avctx, AV_LOG_ERROR, "invalid header size %u\n", hsize);
         return AVERROR_INVALIDDATA;
     }
-
-	//FFmpeg does this, if this comment is still here than we forgot to remove either the conditional or the comment. 
-	//We should probably remove this since we don't really know what it does but there must be some reason BMP has it.
-    /* sometimes file size is set to some headers size, set a real size in that case */
-    if (fsize == 12 || fsize == ihsize + 12)
-      fsize = buf_size - 2;
 	
 	//If the file size is less than the header size then we have a real problem.
     if (fsize <= hsize) {
@@ -126,7 +116,7 @@ static int mpff_decode_frame(AVCodecContext *avctx,
 
     //Point the buffer to the start of the picture data (after the header)
     buf   = buf0 + hsize;
-    //dsize - d-"rest of the image"_size :D
+    // Calculate the non-header size of the image
     dsize = buf_size - hsize;
 
     /* Line size in file multiple of 4 */
@@ -143,17 +133,21 @@ static int mpff_decode_frame(AVCodecContext *avctx,
       av_log(avctx, AV_LOG_ERROR, "data size too small, assuming missing line alignment\n");
     }
 
+	// Calculate the number of colors
     int colors = 1 << depth;
 
     memset(p->data[1], 0, 1024);
-
+	
+	// Calculate the location of the pallette
     buf = buf0 + 12 + ihsize; //palette location
 
+	// Read in the pallette
     for (i = 0; i < colors; i++)
       {
 	((uint32_t*)p->data[1])[i] = 0xFFU << 24 | bytestream_get_le32(&buf);
       }
 
+	// Set the buffer to the end of the header
     buf = buf0 + hsize;
 
     //Set the pointer to the start of the picture data
