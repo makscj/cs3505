@@ -3,7 +3,6 @@
  * Copyright (c) 2015 John Ballard and Maks Cegielski-Johnson
  *
  * This file is part of FFmpeg. Created for CS 3505.
- * AV_PIX_FMT_RGB8
  *
  * FFmpeg is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -40,7 +39,7 @@ static av_cold int mpff_encode_init(AVCodecContext *avctx){
 	else
 	{
 		av_log(avctx, AV_LOG_INFO, "unsupported pixel format\n");
-        return AVERROR(EINVAL);
+        	return AVERROR(EINVAL);
 	}
 	//Allocate frame memory space
     avctx->coded_frame = av_frame_alloc();
