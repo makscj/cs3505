@@ -5,7 +5,7 @@
 
 ball::ball(const int _width, const int _height)
 :height(_height), width(_width)
-{
+{ 
   this->radius = std::min(width, height)/10;
   this->x_pos = width/2;
   this->y_pos = height/2;
