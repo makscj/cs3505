@@ -1,5 +1,6 @@
 #include <iostream>
 #include "ball.h"
+#include <typeinfo>
 
 #ifndef INT64_C
 #define INT64_C(c) (c ## LL)
@@ -25,7 +26,7 @@ using namespace std;
 
 // This function was adapted from code found at https://lists.libav.org/pipermail/libav-user/2010-August/005159.html
 // TODO: properly cite
-int SaveFrame(AVFrame *pFrame, AVCodecContext *pCodecCtx, int FrameNo) {
+int SaveFrame(const AVFrame *pFrame, const AVCodecContext *pCodecCtx, int FrameNo) {
   
   AVFrame                *pOFrame;
   AVCodecContext         *pOCodecCtx;
@@ -35,8 +36,8 @@ int SaveFrame(AVFrame *pFrame, AVCodecContext *pCodecCtx, int FrameNo) {
   int                     BufSiz;
   int                     BufSizActual;
   AVPixelFormat           ImgFmt;
-  FILE                   *JPEGFile;
-  char                    JPEGFName[256];
+  FILE                   *ImageFile;
+  char                    ImageFName[256];
   SwsContext              *sws_ctx;
 
   BufSiz = avpicture_get_size (ImgFmt, pCodecCtx->width, pCodecCtx->height );
@@ -48,9 +49,10 @@ int SaveFrame(AVFrame *pFrame, AVCodecContext *pCodecCtx, int FrameNo) {
   //memset ( Buffer, 0, BufSiz );
   
   pOCodec = avcodec_find_encoder ( AV_CODEC_ID_MPFF );
+
   if ( !pOCodec ) {
     //free ( Buffer );
-    return ( 0 );
+    return -1;
   }
 
   // Get the first suppported pixel format and use that.
@@ -128,13 +130,12 @@ int SaveFrame(AVFrame *pFrame, AVCodecContext *pCodecCtx, int FrameNo) {
   pkt.size = 0;
 
   int ret = 0;
-  int *ret_ptr = &ret;
-  BufSizActual = avcodec_encode_video2(pOCodecCtx, &pkt,  pOFrame, ret_ptr);
+  BufSizActual = avcodec_encode_video2(pOCodecCtx, &pkt,  pOFrame, &ret);
 
-  sprintf ( JPEGFName, "%06d.mpff", FrameNo );
-  JPEGFile = fopen ( JPEGFName, "wb" );
-  fwrite ( pkt.data, 1, pkt.size, JPEGFile );
-  fclose ( JPEGFile );
+  sprintf ( ImageFName, "frame%03d.mpff", FrameNo );
+  ImageFile = fopen ( ImageFName, "wb" );
+  fwrite ( pkt.data, 1, pkt.size, ImageFile );
+  fclose ( ImageFile );
 
   avcodec_close ( pOCodecCtx );
   av_frame_free(&pOFrame);
@@ -160,9 +161,16 @@ int main(int argc, char *argv[]) {
   SwsContext *sws_ctx = NULL;
 
   if(argc != 2) {
-    printf("Please give 1 image file as the argument.\n");
+    cout << "Please give 1 image file as the argument." << endl;
     return -1;
   }
+  
+  string filename(argv[1]);
+
+  if(filename.compare(filename.length()-4, 4, ".jpg")){
+      cout << "Image file must be a .jpg image" << endl;
+      return -1;
+    }
   // Register all formats and codecs
   av_register_all();
   
@@ -238,6 +246,8 @@ int main(int argc, char *argv[]) {
 			   NULL
 			   );
 
+ 
+
   // Read frames and save first five frames to disk
   i=0;
   while(av_read_frame(pFormatCtx, &packet)>=0) {
@@ -252,32 +262,91 @@ int main(int argc, char *argv[]) {
 	sws_scale(sws_ctx, (uint8_t const * const *)pFrame->data,
 		  pFrame->linesize, 0, pCodecCtx->height,
 		  pFrameRGB->data, pFrameRGB->linesize);
-	
+	// Update Codec Context pixel format to match pFrameRGB's format
 	pCodecCtx -> pix_fmt = PIX_FMT_RGB24;
-	//cout << pCodecCtx -> width << endl;
-	//cout << pCodecCtx->height << endl;
-	for(i = 0; i < (pCodecCtx->width * pCodecCtx->height * 3); i++)
-	  {
-	    cout << (int)(pFrameRGB->data[0])[i] << " ";
-	    if((i+1)%3 == 0){
-	      cout << endl;
-	    }
-	  }
-	
-	// Save the frame to disk
-	if(++i<=5)
-	  SaveFrame(pFrameRGB, pCodecCtx, i);
       }
     }
     
     // Free the packet that was allocated by av_read_frame
     av_free_packet(&packet);
   }
+
+  
+  // Allocate an AVFrame structure
+  AVFrame* newFrame = av_frame_alloc();
+  if(newFrame==NULL)
+    {
+      return -1;
+    }
+  
+  // Determine required buffer size and allocate buffer
+  numBytes=avpicture_get_size(PIX_FMT_RGB24, pCodecCtx->width,
+			      pCodecCtx->height);
+
+  buffer=(uint8_t *)av_malloc(numBytes*sizeof(uint8_t));
+  
+  // Assign appropriate parts of buffer to image planes in pFrameRGB
+  // Note that pFrameRGB is an AVFrame, but AVFrame is a superset
+  // of AVPicture
+  avpicture_fill((AVPicture *)newFrame, buffer, PIX_FMT_RGB24,
+		 pCodecCtx->width, pCodecCtx->height);
+  /*
+  av_frame_copy_props(newFrame, pFrameRGB);
+
+  for(i=0; i < AV_NUM_DATA_POINTERS; i++)
+    {
+      newFrame -> linesize[i] = pFrameRGB -> linesize[i];
+    }
+  newFrame -> width = pFrameRGB -> width;
+  newFrame -> height = pFrameRGB -> height;
+  newFrame -> nb_samples = pFrameRGB -> nb_samples;
+  newFrame -> format = pFrameRGB -> format;
+  newFrame -> channel_layout = pFrameRGB -> channel_layout;
+  */
+  
+
+  ball::ball ball(pCodecCtx->width, pCodecCtx->height);
+  for(i = 0; i < 300; i++)
+   {
+     //av_frame_copy(newFrame, pFrameRGB);
+     av_picture_copy((AVPicture*)newFrame, (AVPicture*)pFrameRGB, PIX_FMT_RGB24, pCodecCtx->width, pCodecCtx->height);
+
+      //NEW CODE ***************
+      
+      
+      for(int h = 0; h < pCodecCtx->height; h++)
+	{
+	  for(int w = 0; w < 3 * pCodecCtx->width; w ++)
+	    {
+	      uint8_t *point = newFrame->data[0] + 3*w + h*newFrame->linesize[0];
+	      if(ball.in_ball(w, h) && w < pCodecCtx->width)
+		{
+		  *(point) = 255 * ball.shading_coeff(w, h);
+		  *(point+1) = 0;
+		  *(point+2) = 0;
+		}
+	      else
+		{
+		  continue;
+		}
+	      // int red = (int)(pFrameRGB->data[0])[w];
+
+	    }
+	}
+      ball.update(i);
+      
+      //************************
+	
+      // Save the frame to disk
+      SaveFrame(newFrame, pCodecCtx, i);
+
+    }
   
   // Free the RGB image
   av_free(buffer);
   av_frame_free(&pFrameRGB);
-  
+  // Free our frame
+  av_frame_free(&newFrame);
   // Free the YUV frame
   av_frame_free(&pFrame);
   
