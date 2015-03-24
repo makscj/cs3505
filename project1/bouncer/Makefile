@@ -15,5 +15,5 @@ ball.o: ball.cpp ball.h
 clean:
 	rm -f *.mpff *.o *.mp4 bouncer
 
-movie:
+movie:	frame000.mpff
 	ffmpeg -r 30 -i frame%03d.mpff -c:v mpeg4 -r 30 -pix_fmt yuv420p movie.mp4
