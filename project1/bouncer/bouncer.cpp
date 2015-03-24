@@ -1,3 +1,14 @@
+/*
+Authors:
+Maks Cegielski-Johnson
+John Ballard
+
+CS3505 - Project 1 Checkpoint 3
+
+The bouncer file. Opens a user provided JPEG image, and then animates a ball
+bouncing on the image using 300 mpff files. 
+ */
+
 #include <iostream>
 #include "ball.h"
 #include <typeinfo>
@@ -16,7 +27,7 @@ extern "C"
 
 }
 
-// compatibility with newer API
+// compatibility with newer API - taken from dranger tutorial
 #if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(55,28,1)
 #define av_frame_alloc avcodec_alloc_frame
 #define av_frame_free avcodec_free_frame
@@ -25,12 +36,16 @@ extern "C"
 using namespace std;
 
 // This function was adapted from code found at https://lists.libav.org/pipermail/libav-user/2010-August/005159.html
-// TODO: properly cite
+// The majority of the function is still the same. Changes have been made to write MPFF files instead of JPEGs
+// as well as to allow compatibility with the current version of FFMPEG.
 int SaveFrame(const AVFrame *pFrame, const AVCodecContext *pCodecCtx, int FrameNo) {
   
+  // Most of the variables we'll use
+  // The new frame, codec, and codec context
   AVFrame                *pOFrame;
   AVCodecContext         *pOCodecCtx;
   AVCodec                *pOCodec;
+  // An AVPacket we'll use for writing the file
   AVPacket                pkt;
   uint8_t                *Buffer;
   int                     BufSiz;
@@ -39,19 +54,11 @@ int SaveFrame(const AVFrame *pFrame, const AVCodecContext *pCodecCtx, int FrameN
   FILE                   *ImageFile;
   char                    ImageFName[256];
   SwsContext              *sws_ctx;
-
-  BufSiz = avpicture_get_size (ImgFmt, pCodecCtx->width, pCodecCtx->height );
-
-  //Buffer = (uint8_t *)malloc ( BufSiz );
-  //if ( Buffer == NULL ){
-  //  return ( 0 );
-  //}
-  //memset ( Buffer, 0, BufSiz );
   
+  // Find the codec for the MPFF format
   pOCodec = avcodec_find_encoder ( AV_CODEC_ID_MPFF );
 
   if ( !pOCodec ) {
-    //free ( Buffer );
     return -1;
   }
 
@@ -60,8 +67,8 @@ int SaveFrame(const AVFrame *pFrame, const AVCodecContext *pCodecCtx, int FrameN
 
   // Allocate an AVFrame structure
   pOFrame=av_frame_alloc();
-  pOFrame -> width = pFrame -> width;
-  pOFrame -> height = pFrame -> height;
+  pOFrame -> width = pCodecCtx -> width;
+  pOFrame -> height = pCodecCtx -> height;
   pOFrame -> format = ImgFmt;
 
   if(pOFrame==NULL){
@@ -89,7 +96,7 @@ int SaveFrame(const AVFrame *pFrame, const AVCodecContext *pCodecCtx, int FrameN
 			   NULL
 			   );
  
-  // Convert the image from its native format to RGB
+  // Convert the image from its current format to a format supported by the MPFF codec
   sws_scale(sws_ctx, (uint8_t const * const *)pFrame->data,
 	    pFrame->linesize, 0, pCodecCtx->height,
 	    pOFrame->data, pOFrame->linesize);
@@ -97,10 +104,10 @@ int SaveFrame(const AVFrame *pFrame, const AVCodecContext *pCodecCtx, int FrameN
 
   pOCodecCtx = avcodec_alloc_context3 ( pOCodec );
   if ( !pOCodecCtx ) {
-    //free ( Buffer );
-    return ( 0 );
+    return -1;
   }
-
+  
+  // Copy original codec context data
   pOCodecCtx->bit_rate      = pCodecCtx->bit_rate;
   pOCodecCtx->width         = pCodecCtx->width;
   pOCodecCtx->height        = pCodecCtx->height;
@@ -110,37 +117,41 @@ int SaveFrame(const AVFrame *pFrame, const AVCodecContext *pCodecCtx, int FrameN
   pOCodecCtx->time_base.num = pCodecCtx->time_base.num;
   pOCodecCtx->time_base.den = pCodecCtx->time_base.den;
 
-  
+  // Open the codec
   if ( avcodec_open2 (pOCodecCtx, pOCodec, NULL) < 0 ) {
-    //free ( Buffer );
-    return ( 0 );
+    return -1;
   }
  
-
-  pOCodecCtx->mb_lmin        = pOCodecCtx->lmin =  pOCodecCtx->qmin * FF_QP2LAMBDA;
-  pOCodecCtx->mb_lmax        = pOCodecCtx->lmax = pOCodecCtx->qmax * FF_QP2LAMBDA;
+  // Set more data
+  pOCodecCtx->mb_lmin        = pOCodecCtx->qmin * FF_QP2LAMBDA;
+  pOCodecCtx->mb_lmax        = pOCodecCtx->qmax * FF_QP2LAMBDA;
   pOCodecCtx->flags          = CODEC_FLAG_QSCALE;
   pOCodecCtx->global_quality = pOCodecCtx->qmin * FF_QP2LAMBDA;
 
+  // Set the new AVFrame's data
   pOFrame->pts     = 1;
   pOFrame->quality = pOCodecCtx->global_quality;
-
+  
+  // Initialize the AVPacket
   av_init_packet(&pkt);
   pkt.data = NULL;
   pkt.size = 0;
 
+  // Encode the video into the packet
   int ret = 0;
   BufSizActual = avcodec_encode_video2(pOCodecCtx, &pkt,  pOFrame, &ret);
 
+  // Write the file
   sprintf ( ImageFName, "frame%03d.mpff", FrameNo );
   ImageFile = fopen ( ImageFName, "wb" );
   fwrite ( pkt.data, 1, pkt.size, ImageFile );
   fclose ( ImageFile );
 
+  // Free memory
   avcodec_close ( pOCodecCtx );
   av_frame_free(&pOFrame);
   av_free_packet(&pkt);
-  return ( BufSizActual );
+  return BufSizActual;
   
 }
 
@@ -171,6 +182,10 @@ int main(int argc, char *argv[]) {
       cout << "Image file must be a .jpg image" << endl;
       return -1;
     }
+
+  // Code for reading files below was adapted from the Dranger tutorial
+  // (http://www.learning2.eng.utah.edu/mod/url/view.php?id=14519)
+
   // Register all formats and codecs
   av_register_all();
   
@@ -271,8 +286,12 @@ int main(int argc, char *argv[]) {
     av_free_packet(&packet);
   }
 
+  // END CODE ADAPTED FROM DRANGER TUTORIAL
   
-  // Allocate an AVFrame structure
+ 
+  // Start of original code
+
+  // Allocate an AVFrame structure for copying into
   AVFrame* newFrame = av_frame_alloc();
   if(newFrame==NULL)
     {
@@ -282,7 +301,6 @@ int main(int argc, char *argv[]) {
   // Determine required buffer size and allocate buffer
   numBytes=avpicture_get_size(PIX_FMT_RGB24, pCodecCtx->width,
 			      pCodecCtx->height);
-
   buffer=(uint8_t *)av_malloc(numBytes*sizeof(uint8_t));
   
   // Assign appropriate parts of buffer to image planes in pFrameRGB
@@ -290,58 +308,49 @@ int main(int argc, char *argv[]) {
   // of AVPicture
   avpicture_fill((AVPicture *)newFrame, buffer, PIX_FMT_RGB24,
 		 pCodecCtx->width, pCodecCtx->height);
-  /*
-  av_frame_copy_props(newFrame, pFrameRGB);
-
-  for(i=0; i < AV_NUM_DATA_POINTERS; i++)
-    {
-      newFrame -> linesize[i] = pFrameRGB -> linesize[i];
-    }
-  newFrame -> width = pFrameRGB -> width;
-  newFrame -> height = pFrameRGB -> height;
-  newFrame -> nb_samples = pFrameRGB -> nb_samples;
-  newFrame -> format = pFrameRGB -> format;
-  newFrame -> channel_layout = pFrameRGB -> channel_layout;
-  */
   
-
+  // Create a ball object to represent the ball that we will draw
   ball::ball ball(pCodecCtx->width, pCodecCtx->height);
+  // Loop 300 times to create 300 frames
   for(i = 0; i < 300; i++)
-   {
-     //av_frame_copy(newFrame, pFrameRGB);
-     av_picture_copy((AVPicture*)newFrame, (AVPicture*)pFrameRGB, PIX_FMT_RGB24, pCodecCtx->width, pCodecCtx->height);
+   {     
+     // Copy the background image into the new frame we created
+     av_picture_copy((AVPicture*)newFrame, (AVPicture*)pFrameRGB, 
+		     PIX_FMT_RGB24, pCodecCtx->width, pCodecCtx->height);
+      
+     // Loop through each row in the picture
+     for(int h = 0; h < pCodecCtx->height; h++)
+       {
+	 // Loop through each pixel in the row
+	 for(int w = 0; w < 3 * pCodecCtx->width; w ++)
+	   {
+	     // Go to the point in the data array that represents the pixel we want
+	     uint8_t *point = newFrame->data[0] + 3*w + h*newFrame->linesize[0];
+	     // If the pixel is in the ball and not beyond the end of this line, draw over it.
+	     if(ball.in_ball(w, h) && w < pCodecCtx->width)
+	       {
+		 // Color the ball red with shading (fade to black).
+		 *(point) = 255 * ball.shading_coeff(w, h);
+		 *(point+1) = 0;
+		 *(point+2) = 0;
+	       }
+	   }
+       }
 
-      //NEW CODE ***************
-      
-      
-      for(int h = 0; h < pCodecCtx->height; h++)
-	{
-	  for(int w = 0; w < 3 * pCodecCtx->width; w ++)
-	    {
-	      uint8_t *point = newFrame->data[0] + 3*w + h*newFrame->linesize[0];
-	      if(ball.in_ball(w, h) && w < pCodecCtx->width)
-		{
-		  *(point) = 255 * ball.shading_coeff(w, h);
-		  *(point+1) = 0;
-		  *(point+2) = 0;
-		}
-	      else
-		{
-		  continue;
-		}
-	      // int red = (int)(pFrameRGB->data[0])[w];
-
-	    }
-	}
-      ball.update(i);
-      
-      //************************
-	
-      // Save the frame to disk
-      SaveFrame(newFrame, pCodecCtx, i);
+     // Update the ball's position based on the frame we are currently on.
+     ball.update();
+     
+     /*
+     if(i % 25 == 0)
+       cout << "Saving frame " << i << endl;
+     //*/
+     // Save the frame to disk
+     SaveFrame(newFrame, pCodecCtx, i);
 
     }
   
+  // These statements were modified from the Dranger tutorial
+
   // Free the RGB image
   av_free(buffer);
   av_frame_free(&pFrameRGB);

@@ -16,4 +16,4 @@ clean:
 	rm -f *.mpff *.o *.mp4 bouncer
 
 movie:
-	ffmpeg -r 10 -i frame%03d.mpff -c:v mpeg4 -r 30 -pix_fmt yuv420p movie.mp4
+	ffmpeg -r 30 -i frame%03d.mpff -c:v mpeg4 -r 30 -pix_fmt yuv420p movie.mp4
